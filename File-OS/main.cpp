@@ -1,8 +1,15 @@
 #include<iostream>
 #include<cstdio>
+
+
+#include "File.h"
+
+
+
 using namespace std;
 int main()
 {
-	cout << "File - OS" << endl;
+	File *f;
+	f = new File();
 	return 0;
 }
