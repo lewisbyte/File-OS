@@ -8,6 +8,7 @@ File::File()
 
 File::~File()
 {
+
 }
 
 void File::Serialization()
@@ -18,4 +19,9 @@ void File::Serialization()
 void File::Deserialization()
 {
 	freopen(name.c_str(), "w", stdout);
+}
+
+bool File::operator<(File & t) const
+{
+	return false;
 }

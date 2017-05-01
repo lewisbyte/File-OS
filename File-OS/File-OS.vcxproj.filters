@@ -21,9 +21,15 @@
     <ClCompile Include="File.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="DiskMannger.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="File.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="DiskMannger.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
