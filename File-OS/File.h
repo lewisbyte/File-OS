@@ -8,10 +8,17 @@ class File
 public:
 	File();
 	~File();
+	void Serialization();
+	void Deserialization();
 
 private:
-	std::string fileName;
-	void fun();
+	string name;
+	string content;
+	bool type;
+
 };
+
+
+
 
 

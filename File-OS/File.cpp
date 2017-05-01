@@ -2,13 +2,20 @@
 
 File::File() 
 {
+
 	cout << "File init" << endl;
 }
 
 File::~File()
 {
 }
-void File::fun() 
-{
 
+void File::Serialization()
+{
+	freopen(name.c_str(), "r", stdin);
+}
+
+void File::Deserialization()
+{
+	freopen(name.c_str(), "w", stdout);
 }
