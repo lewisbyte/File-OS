@@ -22,9 +22,14 @@ public:
 	//文件是否相同
 	bool operator<(File &t)const;
 
+	//添加文件或文件夹
+	void addChild(File *file);
+
+	//文件类型常量
+	const static bool FOLDER = false;
+	const static bool FILE = true;
 
 
-private:
 	//文件名
 	string name;
 	//文件内容
