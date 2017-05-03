@@ -1,2 +1,8 @@
 ﻿  main.cpp
-d:\workspace\file-os\file-os\main.cpp(17): error C3892: “a”: 不能给常量赋值
+  File.cpp
+  DiskMannger.cpp
+d:\workspace\file-os\file-os\diskmannger.cpp(92): warning C4129: “(”: 不可识别的字符转义序列
+d:\workspace\file-os\file-os\diskmannger.cpp(156): warning C4129: “(”: 不可识别的字符转义序列
+  正在生成代码...
+  File-OS.vcxproj -> D:\Workspace\File-OS\x64\Debug\File-OS.exe
+  File-OS.vcxproj -> D:\Workspace\File-OS\x64\Debug\File-OS.pdb (Partial PDB)

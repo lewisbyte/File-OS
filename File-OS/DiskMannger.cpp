@@ -100,21 +100,21 @@ void DiskMannger::rmdir()
 
 void DiskMannger::ls()
 {
-	set<File>::iterator it = this->root->child.begin();
-	set<File>::iterator end = this->root->child.end();
+	map<File,File>::iterator it = this->root->child.begin();
+	map<File,File>::iterator end = this->root->child.end();
 	//设置文本颜色
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), BACKGROUND_BLUE);//蓝色
 	cout << ".." << endl;
 	while (it != end) 
 	{
-		if (it->type==File::FOLDER){
+		if (it->first.type==File::FOLDER){
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), BACKGROUND_BLUE);
 		}
 		else {
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY |
 				FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);//白色
 		}
-		cout << it->name<<endl;
+		cout << it->first.name<<endl;
 		it++;
 	}
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY |
@@ -130,8 +130,7 @@ void DiskMannger::cd()
 	}
 	else {
 		if (this->root->child.count(File(name, File::FOLDER))) {
-			this->temp = (*this->root->child.find(File(name, File::FOLDER)));
-			root = &temp;
+			root = &this->root->child[File(name, File::FOLDER)];
 		}
 		else {
 			cout << "无此文件夹 ㄟ( ▔, ▔ )ㄏ" << endl;

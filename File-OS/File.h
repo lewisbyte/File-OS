@@ -3,7 +3,7 @@
 #include<iostream>
 #include<algorithm>
 #include<functional>
-#include<set>
+#include<map>
 using namespace std;
 
 class File
@@ -40,7 +40,7 @@ public:
 	//文件类型
 	bool type;
 	//文件夹包含的子内容
-	set<File> child;
+	map<File,File> child;
 	//上一级文件夹
 	File* father;
 	//文件路径

@@ -32,5 +32,5 @@ bool File::operator<(const File & t) const
 
 void File::addChild(File  file)
 {
-	this->child.insert(file);
+	this->child[file]=file;
 }
