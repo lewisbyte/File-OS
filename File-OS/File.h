@@ -43,6 +43,8 @@ public:
 	set<File> child;
 	//上一级文件夹
 	File* father;
+	//文件路径
+	string path;
 
 };
 

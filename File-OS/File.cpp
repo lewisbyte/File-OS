@@ -27,7 +27,7 @@ void File::Deserialization()
 
 bool File::operator<(const File & t) const
 {
-	return t.name<this->name;
+	return t.name>this->name;
 }
 
 void File::addChild(File  file)

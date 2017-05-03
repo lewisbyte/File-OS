@@ -4,11 +4,12 @@ DiskMannger::DiskMannger()
 {
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY |
 		FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
-	root = File("..",File::FOLDER);
+	root = new File("",File::FOLDER);
+	root->path = "../";
 	//设置磁盘根为目录
 	//设置根节点的父节点为自身
-	root.father = &root;
-	cout << "欢迎！！~-----------您可输入help获得帮助------------" << endl<< "\n[root@localhost ~]# ";
+	root->father = root;
+	cout << "欢迎！！-----------您可输入help获得帮助------------" << endl<< "\n[root@localhost ~]# ";
 	string opear,cmd;
 	while (cin >> cmd) 
 	{
@@ -60,7 +61,7 @@ DiskMannger::DiskMannger()
 		else {
 			cout << "输入指令错误，请重新输入！！" << endl;
 		}
-		cout << "\n[root@localhost ~]# ";
+		cout << "\n[root@localhost "+this->root->path+" ]# ";
 
 	}
 }
@@ -80,15 +81,16 @@ void DiskMannger::mkdir()
 
 	File childFile = File(name, File::FOLDER);
 	//设置父节点
-	childFile.father = &(this->root);
+	childFile.father = (this->root);
+	childFile.path = this->root->path + name + "/" ;
 	//判断是否文件重复
-	if (this->root.child.count(childFile)) {
+	if (this->root->child.count(childFile)) {
 		//文件重复报错
 		cout << "创建文件夹失败，文件夹名出现重复！！( ⊙o⊙ )?" << endl;
 	}
 	else {
 		cout << "创建成功！ ~\(≧▽≦)/~" << endl;
-		this->root.addChild(childFile);
+		this->root->addChild(childFile);
 	}
 }
 
@@ -98,21 +100,21 @@ void DiskMannger::rmdir()
 
 void DiskMannger::ls()
 {
-	set<File>::iterator it = this->root.child.begin();
-	set<File>::iterator end = this->root.child.end();
+	set<File>::iterator it = this->root->child.begin();
+	set<File>::iterator end = this->root->child.end();
 	//设置文本颜色
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), BACKGROUND_RED | FOREGROUND_GREEN);//红色
-	cout << this->root.name << endl;
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), BACKGROUND_BLUE);//蓝色
+	cout << ".." << endl;
 	while (it != end) 
 	{
-		if (it->FOLDER){
-			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), BACKGROUND_RED | FOREGROUND_GREEN);
+		if (it->type==File::FOLDER){
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), BACKGROUND_BLUE);
 		}
 		else {
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY |
 				FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);//白色
 		}
-		cout << it->name << endl;
+		cout << it->name<<endl;
 		it++;
 	}
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY |
@@ -121,6 +123,21 @@ void DiskMannger::ls()
 
 void DiskMannger::cd()
 {
+	string name;
+	cin >> name;
+	if (name == "..") {
+		this->root = (this->root->father);
+	}
+	else {
+		if (this->root->child.count(File(name, File::FOLDER))) {
+			this->temp = (*this->root->child.find(File(name, File::FOLDER)));
+			root = &temp;
+		}
+		else {
+			cout << "无此文件夹 ㄟ( ▔, ▔ )ㄏ" << endl;
+		}
+	}
+	
 }
 
 void DiskMannger::create()
@@ -130,17 +147,16 @@ void DiskMannger::create()
 	
 	File childFile =  File(name,File::FILE);
 	//设置父节点
-	childFile.father = &(this->root);
+	childFile.father = (this->root);
 	//判断是否文件重复
-	if (this->root.child.count(childFile)) {
+	if (this->root->child.count(childFile)) {
 		//文件重复报错
 		cout << "创建文件失败，文件名出现重复！！( ⊙o⊙ )?" << endl;
 	}
 	else {
 		cout << "创建成功！ ~\(≧▽≦)/~" << endl;
-		this->root.addChild(childFile);
+		this->root->addChild(childFile);
 	}
-
 }
 
 void DiskMannger::open()

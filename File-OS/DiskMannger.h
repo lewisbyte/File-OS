@@ -19,7 +19,8 @@ public:
 	void read(); //: 用于读文件
 	void rm(); //: 用于删除文件
 private:
-	File root;
+	File *root;
+	File temp;
 };
 
 
