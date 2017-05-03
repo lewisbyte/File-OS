@@ -96,6 +96,18 @@ void DiskMannger::mkdir()
 
 void DiskMannger::rmdir()
 {
+	string name;
+	cin >> name;
+	File childFile = File(name, File::FOLDER);
+	if (this->root->child.count(childFile)) {
+		//文件重复报错
+		this->root->child.erase(childFile);
+		cout << "删除文件夹成功！ ~\(≧▽≦)/~" << endl;
+	}
+	else {
+		cout << "无此文件夹 ，删除文件夹失败！( ⊙o⊙ )?" << endl;
+		
+	}
 }
 
 void DiskMannger::ls()

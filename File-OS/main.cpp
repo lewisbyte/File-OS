@@ -8,15 +8,9 @@
 #include "File.h"
 #include "DiskMannger.h"
 
-
-
 using namespace std;
 int main()
 {
 	DiskMannger();
-
-	vector<int>::iterator it;
-
-
 	return 0;
 }
