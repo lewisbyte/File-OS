@@ -10,6 +10,6 @@
 using namespace std;
 int main()
 {
-	DiskMannger();
+	DiskMannger disk= DiskMannger();
 	return 0;
 }

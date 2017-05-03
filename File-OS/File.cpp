@@ -3,7 +3,6 @@
 File::File() 
 {
 
-	cout << "File init" << endl;
 }
 
 File::~File()
@@ -23,7 +22,7 @@ void File::Deserialization()
 
 bool File::operator<(File & t) const
 {
-	return false;
+	return t.name<this->name;
 }
 
 void File::addChild(File * file)
