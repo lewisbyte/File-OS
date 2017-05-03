@@ -1,6 +1,8 @@
 #pragma once
 #include<string>
 #include<iostream>
+#include<algorithm>
+#include<functional>
 #include<set>
 using namespace std;
 
@@ -10,6 +12,7 @@ public:
 	//构造函数
 	File();
 
+	File::File(string _name, bool _type);
 	//析构函数
 	~File();
 	
@@ -20,10 +23,10 @@ public:
 	void Deserialization();
 
 	//文件是否相同
-	bool operator<(File &t)const;
+	bool operator<(const File &t)const;
 
 	//添加文件或文件夹
-	void addChild(File *file);
+	void addChild(File file);
 
 	//文件类型常量
 	const static bool FOLDER = false;
@@ -37,7 +40,7 @@ public:
 	//文件类型
 	bool type;
 	//文件夹包含的子内容
-	set<File*> child;
+	set<File> child;
 	//上一级文件夹
 	File* father;
 

@@ -1,13 +1,14 @@
-#include "DiskMannger.h"
-
+ï»¿#include "DiskMannger.h"
+#include <windows.h> 
 DiskMannger::DiskMannger()
 {
-	root =new File();
-	//ÉèÖÃ´ÅÅÌ¸ùÎªÄ¿Â¼
-	root->type = File::FOLDER;
-	//ÉèÖÃ¸ù½ÚµãµÄ¸¸½ÚµãÎª×ÔÉí
-	root->father = root;
-	cout << "»¶Ó­£¡£¡~-----------Äú¿ÉÊäÈëhelp»ñµÃ°ïÖú------------" << endl<< "\n[root@localhost ~]# ";
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY |
+		FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
+	root = File("..",File::FOLDER);
+	//è®¾ç½®ç£ç›˜æ ¹ä¸ºç›®å½•
+	//è®¾ç½®æ ¹èŠ‚ç‚¹çš„çˆ¶èŠ‚ç‚¹ä¸ºè‡ªèº«
+	root.father = &root;
+	cout << "æ¬¢è¿ï¼ï¼~-----------æ‚¨å¯è¾“å…¥helpè·å¾—å¸®åŠ©------------" << endl<< "\n[root@localhost ~]# ";
 	string opear,cmd;
 	while (cin >> cmd) 
 	{
@@ -44,20 +45,20 @@ DiskMannger::DiskMannger()
 		else if (cmd == "rm") {
 			this->rm();
 		}else if(cmd=="help"){
-			cout << "\n¡ñformat:¶ÔÎÄ¼ş´æ´¢Æ÷½øĞĞ¸ñÊ½»¯£¬¼´°´ÕÕÎÄ¼şÏµÍ³µÄ½á¹¹¶ÔĞéÄâ´ÅÅÌ¿Õ¼ä½øĞĞ²¼¾Ö£¬²¢ÔÚÆäÉÏ´´½¨¸ùÄ¿Â¼ÒÔ¼°ÓÃÓÚ¹ÜÀíÎÄ¼ş´æ´¢¿Õ¼äµÈµÄÊı¾İ½á¹¹¡£\n"<<
-				"¡ñmkdir:ÓÃÓÚ´´½¨×ÓÄ¿Â¼\n" <<
-				"¡ñrmdir : ÓÃÓÚÉ¾³ı×ÓÄ¿Â¼\n" <<
-				"¡ñls : ÓÃÓÚÏÔÊ¾Ä¿Â¼\n" <<
-				"¡ñcd : ÓÃÓÚ¸ü¸Äµ±Ç°Ä¿Â¼\n" <<
-				"¡ñcreate : ÓÃÓÚ´´½¨ÎÄ¼ş\n" <<
-				"¡ñopen : ÓÃÓÚ´ò¿ªÎÄ¼ş\n" <<
-				"¡ñclose : ÓÃÓÚ¹Ø±ÕÎÄ¼ş\n" <<
-				"¡ñwrite : ÓÃÓÚĞ´ÎÄ¼ş\n" <<
-				"¡ñread : ÓÃÓÚ¶ÁÎÄ¼ş\n" <<
-				"¡ñrm : ÓÃÓÚÉ¾³ıÎÄ¼ş\n" << endl;
+			cout << "\nâ—format:å¯¹æ–‡ä»¶å­˜å‚¨å™¨è¿›è¡Œæ ¼å¼åŒ–ï¼Œå³æŒ‰ç…§æ–‡ä»¶ç³»ç»Ÿçš„ç»“æ„å¯¹è™šæ‹Ÿç£ç›˜ç©ºé—´è¿›è¡Œå¸ƒå±€ï¼Œå¹¶åœ¨å…¶ä¸Šåˆ›å»ºæ ¹ç›®å½•ä»¥åŠç”¨äºç®¡ç†æ–‡ä»¶å­˜å‚¨ç©ºé—´ç­‰çš„æ•°æ®ç»“æ„ã€‚\n"<<
+				"â—mkdir:ç”¨äºåˆ›å»ºå­ç›®å½•\n" <<
+				"â—rmdir : ç”¨äºåˆ é™¤å­ç›®å½•\n" <<
+				"â—ls : ç”¨äºæ˜¾ç¤ºç›®å½•\n" <<
+				"â—cd : ç”¨äºæ›´æ”¹å½“å‰ç›®å½•\n" <<
+				"â—create : ç”¨äºåˆ›å»ºæ–‡ä»¶\n" <<
+				"â—open : ç”¨äºæ‰“å¼€æ–‡ä»¶\n" <<
+				"â—close : ç”¨äºå…³é—­æ–‡ä»¶\n" <<
+				"â—write : ç”¨äºå†™æ–‡ä»¶\n" <<
+				"â—read : ç”¨äºè¯»æ–‡ä»¶\n" <<
+				"â—rm : ç”¨äºåˆ é™¤æ–‡ä»¶\n" << endl;
 		}
 		else {
-			cout << "ÊäÈëÖ¸Áî´íÎó£¬ÇëÖØĞÂÊäÈë£¡£¡" << endl;
+			cout << "è¾“å…¥æŒ‡ä»¤é”™è¯¯ï¼Œè¯·é‡æ–°è¾“å…¥ï¼ï¼" << endl;
 		}
 		cout << "\n[root@localhost ~]# ";
 
@@ -74,6 +75,21 @@ void DiskMannger::format()
 
 void DiskMannger::mkdir()
 {
+	string name;
+	cin >> name;
+
+	File childFile = File(name, File::FOLDER);
+	//è®¾ç½®çˆ¶èŠ‚ç‚¹
+	childFile.father = &(this->root);
+	//åˆ¤æ–­æ˜¯å¦æ–‡ä»¶é‡å¤
+	if (this->root.child.count(childFile)) {
+		//æ–‡ä»¶é‡å¤æŠ¥é”™
+		cout << "åˆ›å»ºæ–‡ä»¶å¤¹å¤±è´¥ï¼Œæ–‡ä»¶å¤¹åå‡ºç°é‡å¤ï¼ï¼( âŠ™oâŠ™ )?" << endl;
+	}
+	else {
+		cout << "åˆ›å»ºæˆåŠŸï¼ ~\(â‰§â–½â‰¦)/~" << endl;
+		this->root.addChild(childFile);
+	}
 }
 
 void DiskMannger::rmdir()
@@ -82,6 +98,25 @@ void DiskMannger::rmdir()
 
 void DiskMannger::ls()
 {
+	set<File>::iterator it = this->root.child.begin();
+	set<File>::iterator end = this->root.child.end();
+	//è®¾ç½®æ–‡æœ¬é¢œè‰²
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), BACKGROUND_RED | FOREGROUND_GREEN);//çº¢è‰²
+	cout << this->root.name << endl;
+	while (it != end) 
+	{
+		if (it->FOLDER){
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), BACKGROUND_RED | FOREGROUND_GREEN);
+		}
+		else {
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY |
+				FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);//ç™½è‰²
+		}
+		cout << it->name << endl;
+		it++;
+	}
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY |
+		FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
 }
 
 void DiskMannger::cd()
@@ -90,6 +125,22 @@ void DiskMannger::cd()
 
 void DiskMannger::create()
 {
+	string name;
+	cin >> name;
+	
+	File childFile =  File(name,File::FILE);
+	//è®¾ç½®çˆ¶èŠ‚ç‚¹
+	childFile.father = &(this->root);
+	//åˆ¤æ–­æ˜¯å¦æ–‡ä»¶é‡å¤
+	if (this->root.child.count(childFile)) {
+		//æ–‡ä»¶é‡å¤æŠ¥é”™
+		cout << "åˆ›å»ºæ–‡ä»¶å¤±è´¥ï¼Œæ–‡ä»¶åå‡ºç°é‡å¤ï¼ï¼( âŠ™oâŠ™ )?" << endl;
+	}
+	else {
+		cout << "åˆ›å»ºæˆåŠŸï¼ ~\(â‰§â–½â‰¦)/~" << endl;
+		this->root.addChild(childFile);
+	}
+
 }
 
 void DiskMannger::open()

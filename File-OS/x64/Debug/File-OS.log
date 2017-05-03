@@ -1,2 +1,5 @@
-﻿  File-OS.vcxproj -> D:\Workspace\File-OS\x64\Debug\File-OS.exe
+﻿  DiskMannger.cpp
+d:\workspace\file-os\file-os\diskmannger.cpp(90): warning C4129: “(”: 不可识别的字符转义序列
+d:\workspace\file-os\file-os\diskmannger.cpp(140): warning C4129: “(”: 不可识别的字符转义序列
+  File-OS.vcxproj -> D:\Workspace\File-OS\x64\Debug\File-OS.exe
   File-OS.vcxproj -> D:\Workspace\File-OS\x64\Debug\File-OS.pdb (Partial PDB)

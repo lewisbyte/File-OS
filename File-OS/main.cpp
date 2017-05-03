@@ -1,6 +1,7 @@
 #include<iostream>
 #include<cstdio>
 #include<set>
+#include <windows.h> 
 
 #include "File.h"
 #include "DiskMannger.h"
@@ -10,6 +11,9 @@
 using namespace std;
 int main()
 {
-	DiskMannger disk= DiskMannger();
+
+	
+
+	DiskMannger();
 	return 0;
 }

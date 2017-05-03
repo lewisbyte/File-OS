@@ -12,14 +12,14 @@ public:
 	void rmdir(); //: 用于删除子目录
 	void ls(); //: 用于显示目录
 	void cd(); //: 用于更改当前目录
-	void create(); //: 用于创建文件
+	void create();//: 用于创建文件
 	void open(); //: 用于打开文件
 	void close(); //: 用于关闭文件
 	void write(); //: 用于写文件
 	void read(); //: 用于读文件
 	void rm(); //: 用于删除文件
 private:
-	File *root;
+	File root;
 };
 
 
