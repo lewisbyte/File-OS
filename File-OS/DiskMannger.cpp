@@ -5,7 +5,7 @@ DiskMannger::DiskMannger()
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY |
 		FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
 	root = new File("",File::FOLDER);
-	root->path = "../";
+	root->path = "~/";
 	//设置磁盘根为目录
 	//设置根节点的父节点为自身
 	root->father = root;
@@ -46,7 +46,7 @@ DiskMannger::DiskMannger()
 		else if (cmd == "rm") {
 			this->rm();
 		}else if(cmd=="help"){
-			cout << "\n●format:对文件存储器进行格式化，即按照文件系统的结构对虚拟磁盘空间进行布局，并在其上创建根目录以及用于管理文件存储空间等的数据结构。\n"<<
+			cout << "\n●format:对文件存储器进行格式化.\n"<<
 				"●mkdir:用于创建子目录\n" <<
 				"●rmdir : 用于删除子目录\n" <<
 				"●ls : 用于显示目录\n" <<
@@ -89,7 +89,7 @@ void DiskMannger::mkdir()
 		cout << "创建文件夹失败，文件夹名出现重复！！( ⊙o⊙ )?" << endl;
 	}
 	else {
-		cout << "创建成功！ ~\(≧▽≦)/~" << endl;
+		cout << "创建文件夹成功！ ~\(≧▽≦)/~" << endl;
 		this->root->addChild(childFile);
 	}
 }
@@ -115,12 +115,12 @@ void DiskMannger::ls()
 	map<File,File>::iterator it = this->root->child.begin();
 	map<File,File>::iterator end = this->root->child.end();
 	//设置文本颜色
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), BACKGROUND_BLUE);//蓝色
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_RED | FOREGROUND_GREEN);//蓝色
 	cout << ".." << endl;
 	while (it != end) 
 	{
 		if (it->first.type==File::FOLDER){
-			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), BACKGROUND_BLUE);
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_RED | FOREGROUND_GREEN);
 		}
 		else {
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY |
@@ -142,7 +142,13 @@ void DiskMannger::cd()
 	}
 	else {
 		if (this->root->child.count(File(name, File::FOLDER))) {
-			root = &this->root->child[File(name, File::FOLDER)];
+			
+			if (this->root->child[File(name, File::FOLDER)].type != File::FOLDER) {
+				cout << "无此文件夹 ㄟ( ▔, ▔ )ㄏ" << endl;
+			}
+			else{
+				root = &this->root->child[File(name, File::FOLDER)];
+			}
 		}
 		else {
 			cout << "无此文件夹 ㄟ( ▔, ▔ )ㄏ" << endl;
@@ -165,7 +171,7 @@ void DiskMannger::create()
 		cout << "创建文件失败，文件名出现重复！！( ⊙o⊙ )?" << endl;
 	}
 	else {
-		cout << "创建成功！ ~\(≧▽≦)/~" << endl;
+		cout << "创建文件成功！ ~\(≧▽≦)/~" << endl;
 		this->root->addChild(childFile);
 	}
 }
@@ -188,4 +194,16 @@ void DiskMannger::read()
 
 void DiskMannger::rm()
 {
+	string name;
+	cin >> name;
+	File childFile = File(name, File::FILE);
+	if (this->root->child.count(childFile)) {
+		//文件重复报错
+		this->root->child.erase(childFile);
+		cout << "删除文件成功！ ~\(≧▽≦)/~" << endl;
+	}
+	else {
+		cout << "无此文件 ，删除文件失败！( ⊙o⊙ )?" << endl;
+	}
+
 }
