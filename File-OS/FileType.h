@@ -1,5 +1,6 @@
 #pragma once
 
 enum FileType {
-	FOLDER , DOCUMENT
+	FOLDER , //文件夹
+	DOCUMENT//文件
 };

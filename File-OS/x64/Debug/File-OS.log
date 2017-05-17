@@ -1,7 +1,53 @@
-﻿  DiskMannger.cpp
+﻿  PCB.cpp
+  Folder.cpp
+  DiskMannger.cpp
+d:\workspace\file-os\file-os\diskmannger.cpp(87): error C2039: “child”: 不是“File”的成员
+  d:\workspace\file-os\file-os\file.h(10): note: 参见“File”的声明
+d:\workspace\file-os\file-os\diskmannger.cpp(87): error C2228: “.count”的左边必须有类/结构/联合
 d:\workspace\file-os\file-os\diskmannger.cpp(92): warning C4129: “(”: 不可识别的字符转义序列
+d:\workspace\file-os\file-os\diskmannger.cpp(93): error C2039: “addChild”: 不是“File”的成员
+  d:\workspace\file-os\file-os\file.h(10): note: 参见“File”的声明
+d:\workspace\file-os\file-os\diskmannger.cpp(102): error C2039: “child”: 不是“File”的成员
+  d:\workspace\file-os\file-os\file.h(10): note: 参见“File”的声明
+d:\workspace\file-os\file-os\diskmannger.cpp(102): error C2228: “.count”的左边必须有类/结构/联合
+d:\workspace\file-os\file-os\diskmannger.cpp(104): error C2039: “child”: 不是“File”的成员
+  d:\workspace\file-os\file-os\file.h(10): note: 参见“File”的声明
+d:\workspace\file-os\file-os\diskmannger.cpp(104): error C2228: “.erase”的左边必须有类/结构/联合
 d:\workspace\file-os\file-os\diskmannger.cpp(105): warning C4129: “(”: 不可识别的字符转义序列
+d:\workspace\file-os\file-os\diskmannger.cpp(115): error C2039: “child”: 不是“File”的成员
+  d:\workspace\file-os\file-os\file.h(10): note: 参见“File”的声明
+d:\workspace\file-os\file-os\diskmannger.cpp(115): error C2228: “.begin”的左边必须有类/结构/联合
+d:\workspace\file-os\file-os\diskmannger.cpp(116): error C2039: “child”: 不是“File”的成员
+  d:\workspace\file-os\file-os\file.h(10): note: 参见“File”的声明
+d:\workspace\file-os\file-os\diskmannger.cpp(116): error C2228: “.end”的左边必须有类/结构/联合
+d:\workspace\file-os\file-os\diskmannger.cpp(141): error C2440: “=”: 无法从“PCB *”转换为“File *”
+  d:\workspace\file-os\file-os\diskmannger.cpp(141): note: 从基类型到派生类型的强制转换需要 dynamic_cast 或 static_cast
+d:\workspace\file-os\file-os\diskmannger.cpp(144): error C2039: “child”: 不是“File”的成员
+  d:\workspace\file-os\file-os\file.h(10): note: 参见“File”的声明
+d:\workspace\file-os\file-os\diskmannger.cpp(144): error C2228: “.count”的左边必须有类/结构/联合
+d:\workspace\file-os\file-os\diskmannger.cpp(146): error C2039: “child”: 不是“File”的成员
+  d:\workspace\file-os\file-os\file.h(10): note: 参见“File”的声明
+d:\workspace\file-os\file-os\diskmannger.cpp(146): error C2228: “.type”的左边必须有类/结构/联合
+d:\workspace\file-os\file-os\diskmannger.cpp(150): error C2039: “child”: 不是“File”的成员
+  d:\workspace\file-os\file-os\file.h(10): note: 参见“File”的声明
+d:\workspace\file-os\file-os\diskmannger.cpp(169): error C2039: “child”: 不是“File”的成员
+  d:\workspace\file-os\file-os\file.h(10): note: 参见“File”的声明
+d:\workspace\file-os\file-os\diskmannger.cpp(169): error C2228: “.count”的左边必须有类/结构/联合
 d:\workspace\file-os\file-os\diskmannger.cpp(174): warning C4129: “(”: 不可识别的字符转义序列
+d:\workspace\file-os\file-os\diskmannger.cpp(175): error C2039: “addChild”: 不是“File”的成员
+  d:\workspace\file-os\file-os\file.h(10): note: 参见“File”的声明
+d:\workspace\file-os\file-os\diskmannger.cpp(200): error C2039: “child”: 不是“File”的成员
+  d:\workspace\file-os\file-os\file.h(10): note: 参见“File”的声明
+d:\workspace\file-os\file-os\diskmannger.cpp(200): error C2228: “.count”的左边必须有类/结构/联合
+d:\workspace\file-os\file-os\diskmannger.cpp(202): error C2039: “child”: 不是“File”的成员
+  d:\workspace\file-os\file-os\file.h(10): note: 参见“File”的声明
+d:\workspace\file-os\file-os\diskmannger.cpp(202): error C2228: “.erase”的左边必须有类/结构/联合
 d:\workspace\file-os\file-os\diskmannger.cpp(203): warning C4129: “(”: 不可识别的字符转义序列
-  File-OS.vcxproj -> D:\Workspace\File-OS\x64\Debug\File-OS.exe
-  File-OS.vcxproj -> D:\Workspace\File-OS\x64\Debug\File-OS.pdb (Partial PDB)
+  正在生成代码...
+  正在编译...
+  File.cpp
+d:\workspace\file-os\file-os\file.cpp(29): error C2509: “<”: 成员函数没有在“File”中声明
+  d:\workspace\file-os\file-os\file.h(10): note: 参见“File”的声明
+  正在生成代码...
+  正在跳过...(未检测到相关更改)
+  main.cpp

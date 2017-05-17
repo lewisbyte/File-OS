@@ -30,8 +30,3 @@ bool File::operator<(const File & t) const
 	
 	return this->name<t.name;
 }
-
-void File::addChild(File  file)
-{
-	this->child[file]=file;
-}

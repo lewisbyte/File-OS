@@ -2,6 +2,9 @@
 #include<string>
 #include "FileType.h"
 #include "Access.h"
+
+const int N  = 4096;
+
 using namespace std;
 class PCB {
 public:
@@ -12,5 +15,10 @@ public:
 	string size;//文件大小：以字节或块为单位的文件长度。
 	Access access;//文件的保护方式：通常有读、写、执行等。
 	string modifyDate;// 文件的创建或修改日期。
-	int index;//索引表
+	PCB *index[N];//索引表
+
+
+				  //文件是否相同
+	bool operator<(const PCB* t)const;
+
 };

@@ -141,7 +141,9 @@
   <ItemGroup>
     <ClCompile Include="DiskMannger.cpp" />
     <ClCompile Include="File.cpp" />
+    <ClCompile Include="Folder.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="PCB.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Access.h" />
