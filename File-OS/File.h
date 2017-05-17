@@ -4,15 +4,16 @@
 #include<algorithm>
 #include<functional>
 #include<map>
+#include "PCB.H"
 using namespace std;
 
-class File
+class File:public PCB
 {
 public:
 	//构造函数
 	File();
 
-	File::File(string _name, bool _type);
+	File::File(string _name, FileType _type);
 	//析构函数
 	~File();
 	
@@ -28,17 +29,13 @@ public:
 	//添加文件或文件夹
 	void addChild(File file);
 
-	//文件类型常量
-	const static bool FOLDER = false;
-	const static bool FILE = true;
+	
 
-
-	//文件名
-	string name;
+	
 	//文件内容
 	string content;
 	//文件类型
-	bool type;
+	FileType type;
 	//文件夹包含的子内容
 	map<File,File> child;
 	//上一级文件夹

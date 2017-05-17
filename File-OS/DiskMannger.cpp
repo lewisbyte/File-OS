@@ -4,12 +4,12 @@ DiskMannger::DiskMannger()
 {
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY |
 		FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
-	root = new File("",File::FOLDER);
-	root->path = "~/";
+	root = new File("",FileType::FOLDER);
+	root->path = "/";
 	//设置磁盘根为目录
 	//设置根节点的父节点为自身
 	root->father = root;
-	cout << "欢迎！！-----------您可输入help获得帮助------------" << endl<< "\n[root@localhost ~]# ";
+	cout << "欢迎！！-----------您可输入help获得帮助------------" << endl<< "\n[root@localhost /]# ";
 	string opear,cmd;
 	while (cin >> cmd) 
 	{
@@ -79,7 +79,7 @@ void DiskMannger::mkdir()
 	string name;
 	cin >> name;
 
-	File childFile = File(name, File::FOLDER);
+	File childFile = File(name, FileType::FOLDER);
 	//设置父节点
 	childFile.father = (this->root);
 	childFile.path = this->root->path + name + "/" ;
@@ -98,7 +98,7 @@ void DiskMannger::rmdir()
 {
 	string name;
 	cin >> name;
-	File childFile = File(name, File::FOLDER);
+	File childFile = File(name, FileType::FOLDER);
 	if (this->root->child.count(childFile)) {
 		//文件重复报错
 		this->root->child.erase(childFile);
@@ -119,7 +119,7 @@ void DiskMannger::ls()
 	cout << ".." << endl;
 	while (it != end) 
 	{
-		if (it->first.type==File::FOLDER){
+		if (it->first.type==FileType::FOLDER){
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_RED | FOREGROUND_GREEN);
 		}
 		else {
@@ -141,13 +141,13 @@ void DiskMannger::cd()
 		this->root = (this->root->father);
 	}
 	else {
-		if (this->root->child.count(File(name, File::FOLDER))) {
+		if (this->root->child.count(File(name, FileType::FOLDER))) {
 			
-			if (this->root->child[File(name, File::FOLDER)].type != File::FOLDER) {
+			if (this->root->child[File(name, FileType::FOLDER)].type != FileType::FOLDER) {
 				cout << "无此文件夹 ㄟ( ▔, ▔ )ㄏ" << endl;
 			}
 			else{
-				root = &this->root->child[File(name, File::FOLDER)];
+				root = &this->root->child[File(name, FileType::FOLDER)];
 			}
 		}
 		else {
@@ -162,7 +162,7 @@ void DiskMannger::create()
 	string name;
 	cin >> name;
 	
-	File childFile =  File(name,File::FILE);
+	File childFile =  File(name, FileType::DOCUMENT);
 	//设置父节点
 	childFile.father = (this->root);
 	//判断是否文件重复
@@ -196,7 +196,7 @@ void DiskMannger::rm()
 {
 	string name;
 	cin >> name;
-	File childFile = File(name, File::FILE);
+	File childFile = File(name, FileType::DOCUMENT);
 	if (this->root->child.count(childFile)) {
 		//文件重复报错
 		this->root->child.erase(childFile);

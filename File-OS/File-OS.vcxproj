@@ -144,8 +144,14 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Access.h" />
     <ClInclude Include="DiskMannger.h" />
     <ClInclude Include="File.h" />
+    <ClInclude Include="FileType.h" />
+    <ClInclude Include="Folder.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="PCB.H" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
