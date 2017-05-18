@@ -1,7 +1,4 @@
-
-
 #include <windows.h> 
-
 #include "File.h"
 #include "DiskMannger.h"
 

@@ -106,9 +106,9 @@ void DiskMannger::rmdir()
 	string name;
 	cin >> name;
 	File *childFile =new File(name, FOLDER);
-	if (this->root->count(childFile)) {
+	if (this->root->erase(childFile)) {
 		//文件重复报错
-		this->root->erase(childFile);
+		
 		cout << "删除文件夹成功" << endl;
 	}
 	else {
@@ -120,7 +120,7 @@ void DiskMannger::rmdir()
 void DiskMannger::ls()
 {
 	
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_RED | FOREGROUND_GREEN);//蓝色
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_RED | FOREGROUND_GREEN| FOREGROUND_BLUE);
 
 	printf("%s\n", "访问权限\t文件大小\t修改日期\t文件名");
 	int size = this->root->size();
@@ -150,7 +150,7 @@ void DiskMannger::cd()
 		this->root = (Folder*)(this->root->father);
 	}
 	else {
-		if (this->root->count(new File(name.c_str(), FOLDER))) {
+		if (this->root->count(new File(name, FOLDER))) {
 			
 			if (this->root->find(new File(name, FOLDER))->type != FOLDER) 
 			{
