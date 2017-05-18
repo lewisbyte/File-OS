@@ -2,6 +2,7 @@
 #include<string>
 #include "FileType.h"
 #include "Access.h"
+#include "Folder.h"
 
 const int N  = 4096;
 
@@ -17,8 +18,6 @@ public:
 	string modifyDate;// 文件的创建或修改日期。
 	PCB *index[N];//索引表
 
-
-				  //文件是否相同
-	bool operator<(const PCB* t)const;
+	PCB *father;
 
 };

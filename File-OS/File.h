@@ -25,7 +25,7 @@ public:
 
 	
 	//文件内容
-	string content;
+	char content[N];
 	
 	//上一级文件夹
 	PCB* father;

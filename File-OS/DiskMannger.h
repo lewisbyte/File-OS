@@ -1,5 +1,6 @@
 #pragma once
 #include "File.h"
+#include "Folder.h"
 
 class DiskMannger
 {
@@ -19,8 +20,7 @@ public:
 	void read(); //: 用于读文件
 	void rm(); //: 用于删除文件
 private:
-	File *root;
-	File temp;
+	Folder *root;
 };
 
 

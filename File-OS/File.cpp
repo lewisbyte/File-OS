@@ -25,8 +25,3 @@ void File::Deserialization()
 	
 }
 
-bool File::operator<(const File & t) const
-{
-	
-	return this->name<t.name;
-}

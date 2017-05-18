@@ -1,10 +1,13 @@
 ﻿#include "DiskMannger.h"
 #include <windows.h> 
+#include "Folder.h"
+#include "FileType.h"
+#include "Access.h"
 DiskMannger::DiskMannger()
 {
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY |
 		FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
-	root = new File("",FileType::FOLDER);
+	root = new Folder("/",FileType::FOLDER);
 	root->path = "/";
 	//设置磁盘根为目录
 	//设置根节点的父节点为自身
@@ -79,17 +82,19 @@ void DiskMannger::mkdir()
 	string name;
 	cin >> name;
 
-	File childFile = File(name, FileType::FOLDER);
+	Folder *childFile = new Folder(name,FileType::FOLDER);
+	
 	//设置父节点
-	childFile.father = (this->root);
-	childFile.path = this->root->path + name + "/" ;
+	childFile->father = (this->root);
+	childFile->path = this->root->path + name + "/" ;
 	//判断是否文件重复
-	if (this->root->child.count(childFile)) {
+	
+	if (this->root->count(childFile)) {
 		//文件重复报错
-		cout << "创建文件夹失败，文件夹名出现重复！！( ⊙o⊙ )?" << endl;
+		cout << "创建文件夹失败，文件夹名出现重复" << endl;
 	}
 	else {
-		cout << "创建文件夹成功！ ~\(≧▽≦)/~" << endl;
+		cout << "创建文件夹成功" << endl;
 		this->root->addChild(childFile);
 	}
 }
@@ -98,36 +103,38 @@ void DiskMannger::rmdir()
 {
 	string name;
 	cin >> name;
-	File childFile = File(name, FileType::FOLDER);
-	if (this->root->child.count(childFile)) {
+	File *childFile =new File(name, FOLDER);
+	if (this->root->count(childFile)) {
 		//文件重复报错
-		this->root->child.erase(childFile);
-		cout << "删除文件夹成功！ ~\(≧▽≦)/~" << endl;
+		this->root->erase(childFile);
+		cout << "删除文件夹成功" << endl;
 	}
 	else {
-		cout << "无此文件夹 ，删除文件夹失败！( ⊙o⊙ )?" << endl;
+		cout << "无此文件夹 ，删除文件夹失败" << endl;
 		
 	}
 }
 
 void DiskMannger::ls()
 {
-	map<File,File>::iterator it = this->root->child.begin();
-	map<File,File>::iterator end = this->root->child.end();
-	//设置文本颜色
+	
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_RED | FOREGROUND_GREEN);//蓝色
-	cout << ".." << endl;
-	while (it != end) 
+
+	printf("%s\n", "访问权限\t文件大小\t修改日期\t文件名");
+	int size = this->root->child.size();
+	
+	for(int i= 0;i<size;i++)
 	{
-		if (it->first.type==FileType::FOLDER){
+		
+		if (this->root->child[i]->type==FOLDER){
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_RED | FOREGROUND_GREEN);
 		}
 		else {
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY |
 				FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);//白色
 		}
-		cout << it->first.name<<endl;
-		it++;
+		cout << this->root->child[i]->name<<endl;
+		
 	}
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY |
 		FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
@@ -138,20 +145,22 @@ void DiskMannger::cd()
 	string name;
 	cin >> name;
 	if (name == "..") {
-		this->root = (this->root->father);
+		this->root = (Folder*)(this->root->father);
 	}
 	else {
-		if (this->root->child.count(File(name, FileType::FOLDER))) {
+		if (this->root->count(new File(name, FOLDER))) {
 			
-			if (this->root->child[File(name, FileType::FOLDER)].type != FileType::FOLDER) {
-				cout << "无此文件夹 ㄟ( ▔, ▔ )ㄏ" << endl;
+			if (this->root->find(new File(name, FOLDER))->type != FOLDER) 
+			{
+				cout << "无此文件夹" << endl;
 			}
-			else{
-				root = &this->root->child[File(name, FileType::FOLDER)];
+			else
+			{
+				root = (Folder*)this->root->find(new Folder(name, FOLDER));
 			}
 		}
 		else {
-			cout << "无此文件夹 ㄟ( ▔, ▔ )ㄏ" << endl;
+			cout << "无此文件夹 " << endl;
 		}
 	}
 	
@@ -162,16 +171,16 @@ void DiskMannger::create()
 	string name;
 	cin >> name;
 	
-	File childFile =  File(name, FileType::DOCUMENT);
+	File *childFile =  new File(name, DOCUMENT);
 	//设置父节点
-	childFile.father = (this->root);
+	childFile->father = (this->root);
 	//判断是否文件重复
-	if (this->root->child.count(childFile)) {
+	if (this->root->count(childFile)) {
 		//文件重复报错
-		cout << "创建文件失败，文件名出现重复！！( ⊙o⊙ )?" << endl;
+		cout << "创建文件失败，文件名出现重复！！" << endl;
 	}
 	else {
-		cout << "创建文件成功！ ~\(≧▽≦)/~" << endl;
+		cout << "创建文件成功！" << endl;
 		this->root->addChild(childFile);
 	}
 }
@@ -196,14 +205,14 @@ void DiskMannger::rm()
 {
 	string name;
 	cin >> name;
-	File childFile = File(name, FileType::DOCUMENT);
-	if (this->root->child.count(childFile)) {
+	File *childFile = new File(name, DOCUMENT);
+	if (this->root->count(childFile)) {
 		//文件重复报错
-		this->root->child.erase(childFile);
-		cout << "删除文件成功！ ~\(≧▽≦)/~" << endl;
+		this->root->erase(childFile);
+		cout << "删除文件成功！" << endl;
 	}
 	else {
-		cout << "无此文件 ，删除文件失败！( ⊙o⊙ )?" << endl;
+		cout << "无此文件 ，删除文件失败" << endl;
 	}
 
 }
