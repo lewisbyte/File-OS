@@ -3,6 +3,8 @@
 #include "Folder.h"
 #include "FileType.h"
 #include "Access.h"
+#include<iostream>
+using namespace std;
 DiskMannger::DiskMannger()
 {
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY |
@@ -121,7 +123,7 @@ void DiskMannger::ls()
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_RED | FOREGROUND_GREEN);//蓝色
 
 	printf("%s\n", "访问权限\t文件大小\t修改日期\t文件名");
-	int size = this->root->child.size();
+	int size = this->root->size();
 	
 	for(int i= 0;i<size;i++)
 	{
@@ -148,7 +150,7 @@ void DiskMannger::cd()
 		this->root = (Folder*)(this->root->father);
 	}
 	else {
-		if (this->root->count(new File(name, FOLDER))) {
+		if (this->root->count(new File(name.c_str(), FOLDER))) {
 			
 			if (this->root->find(new File(name, FOLDER))->type != FOLDER) 
 			{

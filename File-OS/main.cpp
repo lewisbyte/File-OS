@@ -1,9 +1,6 @@
-#include<iostream>
-#include<cstdio>
-#include<set>
+
+
 #include <windows.h> 
-#include<list>
-#include<vector>
 
 #include "File.h"
 #include "DiskMannger.h"

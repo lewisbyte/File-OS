@@ -49,7 +49,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="PCB.H">
+    <Text Include="PCB.h">
       <Filter>头文件</Filter>
     </Text>
   </ItemGroup>

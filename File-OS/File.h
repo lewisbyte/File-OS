@@ -1,11 +1,7 @@
 #pragma once
-#include<string>
-#include<iostream>
-#include<algorithm>
-#include<functional>
-#include<map>
+
 #include "PCB.H"
-using namespace std;
+#include<string>
 
 class File:public PCB
 {
