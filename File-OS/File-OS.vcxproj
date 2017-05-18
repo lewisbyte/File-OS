@@ -148,6 +148,7 @@
   <ItemGroup>
     <ClInclude Include="Access.h" />
     <ClInclude Include="DiskMannger.h" />
+    <ClInclude Include="FAT.h" />
     <ClInclude Include="File.h" />
     <ClInclude Include="FileType.h" />
     <ClInclude Include="Folder.h" />

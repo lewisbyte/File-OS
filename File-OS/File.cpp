@@ -6,6 +6,8 @@ File::File()
 }
 File::File(string _name, FileType _type)
 {
+	this->name = _name;
+	this->type = _type;
 }
 
 File::~File()

@@ -1,9 +1,14 @@
-﻿#include "DiskMannger.h"
-#include <windows.h> 
+﻿#include <windows.h> 
+#include<iostream>
+#include<iomanip>
+#include "DiskMannger.h"
 #include "Folder.h"
 #include "FileType.h"
 #include "Access.h"
-#include<iostream>
+
+
+const string ACCESS[] = { "只读","可修改","可执行" };
+
 using namespace std;
 DiskMannger::DiskMannger()
 {
@@ -122,7 +127,11 @@ void DiskMannger::ls()
 	
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_RED | FOREGROUND_GREEN| FOREGROUND_BLUE);
 
-	printf("%s\n", "访问权限\t文件大小\t修改日期\t文件名");
+	cout << setw(10) << "访问权限"
+		<< setw(20) <<"文件大小"
+		<< setw(25) << "修改日期"
+		<< setw(20) << "文件名"
+		<< endl;
 	int size = this->root->size();
 	
 	for(int i= 0;i<size;i++)
@@ -135,7 +144,11 @@ void DiskMannger::ls()
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY |
 				FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);//白色
 		}
-		cout << this->root->child[i]->name<<endl;
+		cout << setw(10)<< ACCESS[this->root->child[i]->access]
+			<< setw(20)<<this->root->child[i]->size
+			<< setw(25)<<this->root->child[i]->modifyDate
+			<< setw(20)<<this->root->child[i]->name
+			<<endl;
 		
 	}
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY |
@@ -150,9 +163,9 @@ void DiskMannger::cd()
 		this->root = (Folder*)(this->root->father);
 	}
 	else {
-		if (this->root->count(new File(name, FOLDER))) {
+		if (this->root->count(new Folder(name, FOLDER))) {
 			
-			if (this->root->find(new File(name, FOLDER))->type != FOLDER) 
+			if (this->root->find(new Folder(name, FOLDER))->type != FOLDER)
 			{
 				cout << "无此文件夹" << endl;
 			}
