@@ -39,16 +39,31 @@ void DiskMannger::exit()
 			}
 		}
 		else {
-			
+			File * f = (File*)top;
+			this->DiskWrite(f);
 		}
 	}
+
+}
+
+ void DiskMannger::DiskWrite(File * file)
+{
+	 //文件输出流
+
+	 printf("%s\n", file->path.c_str());
+
+	 freopen(file->name.c_str(), "w", stdout);
+
+	 cout << "hello world" << endl;
+
+	 fclose(stdout);//关闭文件 
+
 
 }
 
 bool DiskMannger::DiskMkdir(string dirName)
 {
 	printf("%s\n",dirName.c_str());
-	 // "A:/test/kl";
 	return _mkdir(dirName.c_str()) == 0;
 }
 
@@ -67,6 +82,8 @@ bool DiskMannger::DiskCkdir(string dirName)
 	}
 	return false;
 }
+
+
 
 
 DiskMannger::DiskMannger()
@@ -253,7 +270,7 @@ void DiskMannger::create()
 	File *childFile =  new File( name, DOCUMENT);
 	//设置父节点
 	childFile->father = (this->root);
-	childFile->path = this->root->path + name + "/";
+	childFile->path = this->root->path + name;
 	//判断是否文件重复
 	if (this->root->count(childFile)) {
 		//文件重复报错

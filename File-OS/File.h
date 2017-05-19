@@ -20,8 +20,8 @@ public:
 	void Deserialization();
 
 	
-	//文件内容
-	char content[N];
+	//文件索引
+	char *index[N];
 	
 	//上一级文件夹
 	FCB* father;

@@ -2,5 +2,7 @@
 
 class FAT {
 public:
+
+	
 	void init();
 };

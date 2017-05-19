@@ -1,2 +1,7 @@
-﻿  File-OS.vcxproj -> D:\Workspace\File-OS\x64\Debug\File-OS.exe
+﻿  DiskMannger.cpp
+d:\workspace\file-os\file-os\diskmannger.cpp(55): warning C4996: 'freopen': This function or variable may be unsafe. Consider using freopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(242): note: 参见“freopen”的声明
+d:\workspace\file-os\file-os\diskmannger.cpp(73): warning C4996: 'rmdir': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _rmdir. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\direct.h(115): note: 参见“rmdir”的声明
+  File-OS.vcxproj -> D:\Workspace\File-OS\x64\Debug\File-OS.exe
   File-OS.vcxproj -> D:\Workspace\File-OS\x64\Debug\File-OS.pdb (Partial PDB)
