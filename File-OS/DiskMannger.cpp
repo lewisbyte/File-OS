@@ -1,6 +1,8 @@
 ﻿#include <windows.h> 
 #include<iostream>
 #include<iomanip>
+#include<direct.h>  
+#include<io.h> 
 #include "DiskMannger.h"
 #include "Folder.h"
 #include "FileType.h"
@@ -9,7 +11,33 @@
 
 const string ACCESS[] = { "只读","可修改","可执行" };
 
+
 using namespace std;
+
+bool DiskMannger::DiskMkdir(string dirName)
+{
+	  "A:/test/kl";
+	return _mkdir(dirName.c_str()) == 0;
+}
+
+bool DiskMannger::DiskRmdir(string dirName)
+{
+	  "A:/test";
+	return rmdir(dirName.c_str()) == 0;
+}
+
+bool DiskMannger::DiskCkdir(string dirName)
+{
+	 "A:/test";
+	if (_access(dirName.c_str(), 0) == -1)
+	{
+		return  _mkdir(dirName.c_str()) == 0;
+	}
+	return false;
+}
+
+
+
 DiskMannger::DiskMannger()
 {
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY |
@@ -27,10 +55,10 @@ DiskMannger::DiskMannger()
 			this->format();
 		}
 		else if (cmd == "mkdir") {
-			this->mkdir();
+			this->Mkdir();
 		}
 		else if (cmd == "rmdir") {
-			this->rmdir();
+			this->Rmdir();
 		}
 		else if (cmd == "ls") {
 			this->ls();
@@ -84,7 +112,7 @@ void DiskMannger::format()
 {
 }
 
-void DiskMannger::mkdir()
+void DiskMannger::Mkdir()
 {
 	string name;
 	cin >> name;
@@ -106,7 +134,7 @@ void DiskMannger::mkdir()
 	}
 }
 
-void DiskMannger::rmdir()
+void DiskMannger::Rmdir()
 {
 	string name;
 	cin >> name;
