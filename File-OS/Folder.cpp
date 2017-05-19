@@ -4,7 +4,7 @@
 
 
 
-void Folder::addChild(PCB * file)
+void Folder::addChild(FCB * file)
 {
 	this->child.push_back(file);
 }
@@ -17,7 +17,7 @@ Folder::Folder(string _name, FileType _type)
 
 
 
-bool Folder::count(PCB * file)
+bool Folder::count(FCB * file)
 {
 	int size = child.size();
 	for (int i = 0; i < size; i++) {
@@ -28,7 +28,7 @@ bool Folder::count(PCB * file)
 	return false;
 }
 
-PCB* Folder::find(PCB * file)
+FCB* Folder::find(FCB * file)
 {
 	int size = child.size();
 	for (int i = 0; i < size; i++) {
@@ -39,10 +39,10 @@ PCB* Folder::find(PCB * file)
 	return NULL;
 }
 
-bool Folder::erase(PCB * file)
+bool Folder::erase(FCB * file)
 {
 	int size = child.size();
-	vector<PCB*>::iterator  it;
+	vector<FCB*>::iterator  it;
 	for (it = child.begin();it!=child.end();it++) {
 		if ((*it)->type == file->type&&(*it)->name == file->name) {
 			child.erase(it);

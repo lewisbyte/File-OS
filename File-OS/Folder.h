@@ -1,20 +1,20 @@
 #pragma once
 
-#include "PCB.h"
+#include "FCB.h"
 #include "File.h"
 #include<vector>
 #include<string>
 
 
-class Folder:public PCB
+class Folder:public FCB
 {
 public:
-	vector<PCB * >child;
-	void addChild(PCB* file);
+	vector<FCB * >child;
+	void addChild(FCB* file);
 	Folder(string _name, FileType _type);
-	bool count(PCB *file);
-	PCB* find(PCB *file);
-	bool erase(PCB* file);
+	bool count(FCB *file);
+	FCB* find(FCB *file);
+	bool erase(FCB* file);
 	int size();
 private:
 	int childSize;

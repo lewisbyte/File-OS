@@ -1,34 +1,66 @@
 ﻿#include <windows.h> 
 #include<iostream>
 #include<iomanip>
+#include<queue>
 #include<direct.h>  
 #include<io.h> 
 #include "DiskMannger.h"
 #include "Folder.h"
 #include "FileType.h"
 #include "Access.h"
+#include "FAT.h"
 
 
 const string ACCESS[] = { "只读","可修改","可执行" };
-
+const string rootPath = "A:/";
+queue<FCB*> persistQueue;//持久化队列
+FAT fat;
 
 using namespace std;
 
+void DiskMannger::exit()
+{
+	//回退到根目录
+	while (root->father != root) {
+		this->root = (Folder*)(this->root->father);
+	}
+
+	//广度遍历树
+	persistQueue.push(root);
+	while (!persistQueue.empty())
+	{
+		FCB *top = persistQueue.front();
+		persistQueue.pop();
+		if (top->type == FOLDER) {
+			this->DiskMkdir(top->path);
+			Folder *f = (Folder*)top;
+			for (int i = 0; i < f->child.size(); i++) {
+				persistQueue.push(f->child[i]);
+			}
+		}
+		else {
+			
+		}
+	}
+
+}
+
 bool DiskMannger::DiskMkdir(string dirName)
 {
-	  "A:/test/kl";
+	printf("%s\n",dirName.c_str());
+	 // "A:/test/kl";
 	return _mkdir(dirName.c_str()) == 0;
 }
 
 bool DiskMannger::DiskRmdir(string dirName)
 {
-	  "A:/test";
+	 
 	return rmdir(dirName.c_str()) == 0;
 }
 
 bool DiskMannger::DiskCkdir(string dirName)
 {
-	 "A:/test";
+	
 	if (_access(dirName.c_str(), 0) == -1)
 	{
 		return  _mkdir(dirName.c_str()) == 0;
@@ -37,17 +69,18 @@ bool DiskMannger::DiskCkdir(string dirName)
 }
 
 
-
 DiskMannger::DiskMannger()
 {
+	
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY |
 		FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
+
 	root = new Folder("/",FileType::FOLDER);
-	root->path = "/";
+	root->path = rootPath;
 	//设置磁盘根为目录
 	//设置根节点的父节点为自身
 	root->father = root;
-	cout << "欢迎！！-----------您可输入help获得帮助------------" << endl<< "\n[root@localhost /]# ";
+	cout << "欢迎！！-----------您可输入help获得帮助------------" << endl<< "\n[root@localhost A:/]# ";
 	string opear,cmd;
 	while (cin >> cmd) 
 	{
@@ -83,7 +116,11 @@ DiskMannger::DiskMannger()
 		}
 		else if (cmd == "rm") {
 			this->rm();
-		}else if(cmd=="help"){
+		}
+		else if (cmd == "exit") {
+			this->exit();
+		}
+		else if(cmd=="help"){
 			cout << "\n●format:对文件存储器进行格式化.\n"<<
 				"●mkdir:用于创建子目录\n" <<
 				"●rmdir : 用于删除子目录\n" <<
@@ -94,7 +131,9 @@ DiskMannger::DiskMannger()
 				"●close : 用于关闭文件\n" <<
 				"●write : 用于写文件\n" <<
 				"●read : 用于读文件\n" <<
-				"●rm : 用于删除文件\n" << endl;
+				"●rm : 用于删除文件\n" <<
+				"●exit : 退出系统\n"
+				<<endl;
 		}
 		else {
 			cout << "输入指令错误，请重新输入！！" << endl;
@@ -110,6 +149,7 @@ DiskMannger::~DiskMannger()
 
 void DiskMannger::format()
 {
+	fat.init();
 }
 
 void DiskMannger::Mkdir()
@@ -127,8 +167,7 @@ void DiskMannger::Mkdir()
 	if (this->root->count(childFile)) {
 		//文件重复报错
 		cout << "创建文件夹失败，文件夹名出现重复" << endl;
-	}
-	else {
+	}else {
 		cout << "创建文件夹成功" << endl;
 		this->root->addChild(childFile);
 	}
@@ -141,10 +180,8 @@ void DiskMannger::Rmdir()
 	File *childFile =new File(name, FOLDER);
 	if (this->root->erase(childFile)) {
 		//文件重复报错
-		
 		cout << "删除文件夹成功" << endl;
-	}
-	else {
+	}else {
 		cout << "无此文件夹 ，删除文件夹失败" << endl;
 		
 	}
@@ -154,7 +191,6 @@ void DiskMannger::ls()
 {
 	
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_RED | FOREGROUND_GREEN| FOREGROUND_BLUE);
-
 	cout << setw(10) << "访问权限"
 		<< setw(20) <<"文件大小"
 		<< setw(25) << "修改日期"
@@ -214,9 +250,10 @@ void DiskMannger::create()
 	string name;
 	cin >> name;
 	
-	File *childFile =  new File(name, DOCUMENT);
+	File *childFile =  new File( name, DOCUMENT);
 	//设置父节点
 	childFile->father = (this->root);
+	childFile->path = this->root->path + name + "/";
 	//判断是否文件重复
 	if (this->root->count(childFile)) {
 		//文件重复报错

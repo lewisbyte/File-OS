@@ -1,9 +1,9 @@
 #pragma once
 
-#include "PCB.H"
+#include "FCB.H"
 #include<string>
 
-class File:public PCB
+class File:public FCB
 {
 public:
 	//构造函数
@@ -24,7 +24,7 @@ public:
 	char content[N];
 	
 	//上一级文件夹
-	PCB* father;
+	FCB* father;
 
 
 };

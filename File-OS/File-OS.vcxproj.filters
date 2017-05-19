@@ -27,7 +27,10 @@
     <ClCompile Include="Folder.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="PCB.cpp">
+    <ClCompile Include="FAT.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="FCB.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
@@ -52,7 +55,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="PCB.h">
+    <Text Include="FCB.h">
       <Filter>头文件</Filter>
     </Text>
   </ItemGroup>
