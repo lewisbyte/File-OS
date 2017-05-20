@@ -3,21 +3,21 @@
   <Class Name="DiskMannger" Collapsed="true">
     <Position X="4.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAIAAFASAACAAAAACAgCAAAAAAAEAAAAYJAACAIAIA=</HashCode>
+      <HashCode>AAAIAAFASAACAAQAACAgCAAAAAAAEAAAAYJAACAIAIA=</HashCode>
       <FileName>DiskMannger.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="FAT" Collapsed="true">
     <Position X="6.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAABAAAAAQ=</HashCode>
       <FileName>FAT.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="File" Collapsed="true">
     <Position X="0.75" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAACAAAAAAAAAAAAAAAAAEAAAAAECAEEAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAEAAAAAECAEEAAAAAAABAAA=</HashCode>
       <FileName>File.h</FileName>
     </TypeIdentifier>
   </Class>
@@ -43,14 +43,14 @@
       <FileName>FCB.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Enum Name="Access">
+  <Enum Name="Access" Collapsed="true">
     <Position X="4.75" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAIAAEAAAA=</HashCode>
       <FileName>Access.h</FileName>
     </TypeIdentifier>
   </Enum>
-  <Enum Name="FileType">
+  <Enum Name="FileType" Collapsed="true">
     <Position X="6.75" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAgBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>

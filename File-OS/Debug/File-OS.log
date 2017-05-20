@@ -1,3 +1,6 @@
-﻿  main.cpp
-  File-OS.vcxproj -> A:\File-OS\File-OS\Debug\File-OS.exe
-  File-OS.vcxproj -> A:\File-OS\File-OS\Debug\File-OS.pdb (Partial PDB)
+﻿  DiskMannger.cpp
+d:\workspace\file-os\file-os\diskmannger.cpp(42): warning C4018: “<”: 有符号/无符号不匹配
+d:\workspace\file-os\file-os\diskmannger.cpp(83): warning C4996: 'rmdir': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _rmdir. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\direct.h(115): note: 参见“rmdir”的声明
+  File-OS.vcxproj -> D:\Workspace\File-OS\Debug\File-OS.exe
+  File-OS.vcxproj -> D:\Workspace\File-OS\Debug\File-OS.pdb (Partial PDB)

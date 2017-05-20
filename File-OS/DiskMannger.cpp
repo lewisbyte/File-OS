@@ -59,11 +59,9 @@ void DiskMannger::DiskWrite(File * file)
 
 	//freopen(file->name.c_str(), "w", stdout);
 
-	//out = new ofstream(file->path.c_str());
+	out = new ofstream(file->path.c_str());
 	if (out->is_open())
 	{
-		*out << "This is a line.\n";
-		*out << "This is another line.\n";
 		out->close();
 	}
 
@@ -301,7 +299,7 @@ void DiskMannger::open()
 	if (file!=NULL) {
 		
 		printf("%s\n", "文件读写流打开成功!");
-		
+		cout << "\n[root@localhost " + this->root->path + " ]# ";
 		while (cin>>cmd) {
 			cout << "\n[root@localhost " + this->root->path + " ]# ";
 			if (cmd == "write") {
@@ -314,12 +312,7 @@ void DiskMannger::open()
 				this->close();
 				break;
 			}
-			else {
-				cout << "输入指令错误，请重新输入！！" << endl;
-			}
 		}
-
-
 	}
 	else {
 		printf("%s\n", "无法打开文件读写流，无此文件！");
@@ -342,23 +335,26 @@ void DiskMannger::write(const char *s)
 	string content;
 	cin >> content;
 	if (in != NULL)in->close();
-	out->open(s, ios::out);
+	out = new ofstream(s);
 	if (out->is_open())
 	{
 		*out << content;
 	}
+	out->close();
 }
 
 void DiskMannger::read(const char *s)
 {
 	char *content = new char[N];
 	if (out != NULL)out->close();
-	in->open(s, ios::in);
-	if (out->is_open())
+	in =  new ifstream(s);
+	if (in->is_open())
 	{
 		*in >> content;
 	}
+	in->close();
 	cout << content << endl;
+
 }
 
 void DiskMannger::rm()
@@ -368,6 +364,8 @@ void DiskMannger::rm()
 	File *childFile = new File(name, DOCUMENT);
 	if (this->root->count(childFile)) {
 		//文件重复报错
+		childFile =(File*) this->root->find(childFile);
+		remove(childFile->path.c_str());
 		this->root->erase(childFile);
 		cout << "删除文件成功！" << endl;
 	}

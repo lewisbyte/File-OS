@@ -17,10 +17,8 @@ public:
 	string modifyDate;// 文件的创建或修改日期。
 	FCB *index[N];//索引表
 	FCB *father;//父节点
-
 	FCB();
 	~FCB();
-
-	string getTime();
+	string getTime();//获取系统时间
 
 };

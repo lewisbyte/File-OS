@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="DiskMannger" Collapsed="true">
+    <Position X="4.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAFASAACAAQAACAgCAAAAAAAEAAAAYJAACAIAIA=</HashCode>
+      <FileName>DiskMannger.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FAT" Collapsed="true">
+    <Position X="6.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAABAAAAAQ=</HashCode>
+      <FileName>FAT.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="File" Collapsed="true">
+    <Position X="0.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAEAAAAAECAEEAAAAAAABAAA=</HashCode>
+      <FileName>File.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Folder" Collapsed="true">
+    <Position X="2.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAABJCIAAAAAAAAAAAACAAAAAAABEA=</HashCode>
+      <FileName>Folder.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FCB" Collapsed="true">
+    <Position X="1.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAgAAAQAAAAACAAIACAAAAAAAFAAEgAAAAAAEBAAA=</HashCode>
+      <FileName>FCB.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="Access" Collapsed="true">
+    <Position X="4.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAIAAEAAAA=</HashCode>
+      <FileName>Access.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="FileType" Collapsed="true">
+    <Position X="6.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>FileType.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Microsoft YaHei UI" Size="9" />
+</ClassDiagram>
