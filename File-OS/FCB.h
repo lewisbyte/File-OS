@@ -16,7 +16,7 @@ public:
 	Access access;//文件的保护方式：通常有读、写、执行等。
 	string modifyDate;// 文件的创建或修改日期。
 	FCB *index[N];//索引表
-	FCB *father;
+	FCB *father;//父节点
 
 	FCB();
 	~FCB();

@@ -2,6 +2,7 @@
 #include<iostream>
 #include<iomanip>
 #include<queue>
+#include <fstream>  
 #include<direct.h>  
 #include<io.h> 
 #include "DiskMannger.h"
@@ -15,6 +16,10 @@ const string ACCESS[] = { "只读","可修改","可执行" };
 const string rootPath = "A:/";
 queue<FCB*> persistQueue;//持久化队列
 FAT fat;
+char block[N][N];
+ofstream *out = NULL;
+ifstream *in = NULL;
+
 
 using namespace std;
 
@@ -32,7 +37,7 @@ void DiskMannger::exit()
 		FCB *top = persistQueue.front();
 		persistQueue.pop();
 		if (top->type == FOLDER) {
-			this->DiskMkdir(top->path);
+			//this->DiskMkdir(top->path);
 			Folder *f = (Folder*)top;
 			for (int i = 0; i < f->child.size(); i++) {
 				persistQueue.push(f->child[i]);
@@ -40,24 +45,31 @@ void DiskMannger::exit()
 		}
 		else {
 			File * f = (File*)top;
-			this->DiskWrite(f);
+			//this->DiskWrite(f);
 		}
 	}
 
 }
 
- void DiskMannger::DiskWrite(File * file)
+void DiskMannger::DiskWrite(File * file)
 {
-	 //文件输出流
+	//文件输出流
 
-	 printf("%s\n", file->path.c_str());
+	printf("%s\n", file->path.c_str());
 
-	 freopen(file->name.c_str(), "w", stdout);
+	//freopen(file->name.c_str(), "w", stdout);
 
-	 cout << "hello world" << endl;
+	//out = new ofstream(file->path.c_str());
+	if (out->is_open())
+	{
+		*out << "This is a line.\n";
+		*out << "This is another line.\n";
+		out->close();
+	}
 
-	 fclose(stdout);//关闭文件 
+	//cout << "hello world" << endl;
 
+   // fclose(stdout);//关闭文件
 
 }
 
@@ -125,12 +137,6 @@ DiskMannger::DiskMannger()
 		else if (cmd == "close") {
 			this->close();
 		}
-		else if (cmd == "write") {
-			this->write();
-		}
-		else if (cmd == "read") {
-			this->read();
-		}
 		else if (cmd == "rm") {
 			this->rm();
 		}
@@ -162,6 +168,7 @@ DiskMannger::DiskMannger()
 
 DiskMannger::~DiskMannger()
 {
+
 }
 
 void DiskMannger::format()
@@ -186,7 +193,9 @@ void DiskMannger::Mkdir()
 		cout << "创建文件夹失败，文件夹名出现重复" << endl;
 	}else {
 		cout << "创建文件夹成功" << endl;
+		this->DiskMkdir(childFile->path);
 		this->root->addChild(childFile);
+
 	}
 }
 
@@ -279,23 +288,77 @@ void DiskMannger::create()
 	else {
 		cout << "创建文件成功！" << endl;
 		this->root->addChild(childFile);
+		this->DiskWrite(childFile);
 	}
 }
 
 void DiskMannger::open()
 {
+	string name,cmd;
+	cin >> name;
+	
+    File * file = (File*)this->root->find(new File(name, DOCUMENT));
+	if (file!=NULL) {
+		
+		printf("%s\n", "文件读写流打开成功!");
+		
+		while (cin>>cmd) {
+			cout << "\n[root@localhost " + this->root->path + " ]# ";
+			if (cmd == "write") {
+				this->write(file->path.c_str());
+			}
+			else if (cmd == "read") {
+				this->read(file->path.c_str());
+			}
+			else if (cmd == "close") {
+				this->close();
+				break;
+			}
+			else {
+				cout << "输入指令错误，请重新输入！！" << endl;
+			}
+		}
+
+
+	}
+	else {
+		printf("%s\n", "无法打开文件读写流，无此文件！");
+	}
 }
 
 void DiskMannger::close()
 {
+	if (out == NULL||in==NULL) {
+		printf("%s\n", "无文件读写流需要关闭!");
+	}else {
+		out->close();
+		in->close();
+		printf("%s\n", "文件读写流关闭成功!");
+	}
 }
 
-void DiskMannger::write()
+void DiskMannger::write(const char *s)
 {
+	string content;
+	cin >> content;
+	if (in != NULL)in->close();
+	out->open(s, ios::out);
+	if (out->is_open())
+	{
+		*out << content;
+	}
 }
 
-void DiskMannger::read()
+void DiskMannger::read(const char *s)
 {
+	char *content = new char[N];
+	if (out != NULL)out->close();
+	in->open(s, ios::in);
+	if (out->is_open())
+	{
+		*in >> content;
+	}
+	cout << content << endl;
 }
 
 void DiskMannger::rm()
