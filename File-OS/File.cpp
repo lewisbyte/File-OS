@@ -25,3 +25,8 @@ void File::Deserialization()
 	
 }
 
+bool File::addContent(char * content)
+{
+	return false;
+}
+

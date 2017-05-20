@@ -19,4 +19,6 @@ public:
 	char *index[N];
 	//上一级文件夹
 	FCB* father;
+	//添加文件内容
+	bool addContent(char *content);
 };

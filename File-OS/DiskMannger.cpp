@@ -75,6 +75,8 @@ bool DiskMannger::DiskMkdir(string dirName)
 {
 	printf("%s\n",dirName.c_str());
 	return _mkdir(dirName.c_str()) == 0;
+
+
 }
 
 bool DiskMannger::DiskRmdir(string dirName)
@@ -101,6 +103,7 @@ DiskMannger::DiskMannger()
 	
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY |
 		FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
+
 
 	root = new Folder("/",FileType::FOLDER);
 	root->path = rootPath;
@@ -172,6 +175,7 @@ DiskMannger::~DiskMannger()
 void DiskMannger::format()
 {
 	fat.init();
+	printf("%s\n", "磁盘格式化成功！");
 }
 
 void DiskMannger::Mkdir()
@@ -197,13 +201,15 @@ void DiskMannger::Mkdir()
 	}
 }
 
-void DiskMannger::Rmdir()
+void DiskMannger::Rmdir()//TODO fix 不能删除含有文件的文件夹
 {
 	string name;
 	cin >> name;
-	File *childFile =new File(name, FOLDER);
+	Folder *childFile =new Folder(name, FOLDER);
+	childFile = (Folder*) this->root->find(childFile);
 	if (this->root->erase(childFile)) {
 		//文件重复报错
+		_rmdir(childFile->path.c_str());
 		cout << "删除文件夹成功" << endl;
 	}else {
 		cout << "无此文件夹 ，删除文件夹失败" << endl;
@@ -303,7 +309,7 @@ void DiskMannger::open()
 		while (cin>>cmd) {
 			cout << "\n[root@localhost " + this->root->path + " ]# ";
 			if (cmd == "write") {
-				this->write(file->path.c_str());
+				this->write(file->path.c_str(), file);
 			}
 			else if (cmd == "read") {
 				this->read(file->path.c_str());
@@ -330,7 +336,7 @@ void DiskMannger::close()
 	}
 }
 
-void DiskMannger::write(const char *s)
+void DiskMannger::write(const char *s, File* file)
 {
 	string content;
 	cin >> content;
