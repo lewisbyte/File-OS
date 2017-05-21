@@ -12,8 +12,10 @@ public:
 	bool DiskRmdir(string dirName);//删除磁盘文件夹
 	bool DiskCkdir(string dirName);//检查磁盘是否存在文件夹
 	DiskMannger();//磁盘构造函数
-	~DiskMannger();//磁盘类析构函数
-	void format(); //: 对文件存储器进行格式化。
+	~DiskMannger();
+	void format(char blocks[][N]);//: 对文件存储器进行格式化。
+	//磁盘类析构函数
+	
 	void Mkdir();
 	void Rmdir();
 	void ls(); //: 用于显示目录

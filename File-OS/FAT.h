@@ -1,12 +1,30 @@
 #pragma once
 
+#include<stack>
+#include<algorithm>
+
 const static int BLOCK_SIZE = 4096/sizeof(bool);
+
+using namespace std;
 
 class FAT {
 public:
 
-	bool DiskBlock[BLOCK_SIZE];//标记磁盘块是否占用
-	void init();//初始化磁盘
-	int  getBlock();//获取一个空的磁盘块
+	stack<int>freeDiskBlock;//空磁盘块栈
+
+	stack<int>fullDiskBlock;//占用磁盘块
+
+
+
+	void init(char blocks[][BLOCK_SIZE]);
+
+	int  getBlock();
+	void addBlock(int block, char blocks[][BLOCK_SIZE]);
+	//获取一个空的磁盘块
+
+	
+	
+
+
 
 };

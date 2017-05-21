@@ -1,4 +1,5 @@
 ﻿#include <windows.h> 
+#include<stack>
 #include<iostream>
 #include<iomanip>
 #include<queue>
@@ -16,9 +17,10 @@ const string ACCESS[] = { "只读","可修改","可执行" };
 const string rootPath = "A:/";
 queue<FCB*> persistQueue;//持久化队列
 FAT fat;
-char block[N][N];
+char blocks[N][N];
 ofstream *out = NULL;
 ifstream *in = NULL;
+
 
 
 using namespace std;
@@ -115,7 +117,7 @@ DiskMannger::DiskMannger()
 	while (cin >> cmd) 
 	{
 		 if (cmd == "format") {
-			this->format();
+			this->format(blocks);
 		}
 		else if (cmd == "mkdir") {
 			this->Mkdir();
@@ -172,9 +174,9 @@ DiskMannger::~DiskMannger()
 
 }
 
-void DiskMannger::format()
+void DiskMannger::format(char blocks[][N])
 {
-	fat.init();
+	fat.init(blocks);
 	printf("%s\n", "磁盘格式化成功！");
 }
 
@@ -341,6 +343,7 @@ void DiskMannger::write(const char *s, File* file)
 	string content;
 	cin >> content;
 	if (in != NULL)in->close();
+	file->addContent(content.c_str());//添加内容到文件中
 	out = new ofstream(s);
 	if (out->is_open())
 	{
@@ -372,7 +375,9 @@ void DiskMannger::rm()
 		//文件重复报错
 		childFile =(File*) this->root->find(childFile);
 		remove(childFile->path.c_str());
+		childFile->release(fat,blocks);
 		this->root->erase(childFile);
+
 		cout << "删除文件成功！" << endl;
 	}
 	else {

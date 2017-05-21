@@ -2,6 +2,7 @@
 #include<string>
 #include "FileType.h"
 #include "Access.h"
+#include "FAT.h"
 #include <time.h>
 const int N  = 4096;
 
