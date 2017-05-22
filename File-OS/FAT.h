@@ -14,17 +14,10 @@ public:
 
 	stack<int>fullDiskBlock;//占用磁盘块
 
-
-
-	void init(char blocks[][BLOCK_SIZE]);
-
-	void init(string * blocks);
+	void init(string  blocks[]);
 
 	int  getBlock();
 
-	void addBlock(int block, string * blocks);
-
-	void addBlock(int block, char blocks[][BLOCK_SIZE]);
-	//获取一个空的磁盘块
+	void addBlock(int block, string  blocks[]);//获取一个空的磁盘块
 
 };

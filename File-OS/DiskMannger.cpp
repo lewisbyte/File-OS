@@ -14,13 +14,12 @@
 
 
 const string ACCESS[] = { "只读","可修改","可执行" };
-const string rootPath = "A:/";
+const string rootPath = "D:/VitualDisk/";
 queue<FCB*> persistQueue;//持久化队列
 FAT fat;
 string blocks[N];
 ofstream *out = NULL;
 ifstream *in = NULL;
-
 
 
 using namespace std;
@@ -75,28 +74,32 @@ void DiskMannger::DiskRmdir(Folder *f)
 	//DFS删除
 	for (int i = 0; i < f->child.size(); i++) {
 		if (f->child[i]->type == DOCUMENT) {
+			printf("%s\n", f->child[i]->path.c_str());
 			remove(f->child[i]->path.c_str());
+		
 		}else {
 			this->DiskRmdir((Folder*)f->child[i]);
 		}
 	}
+	printf("%s\n", f->path.c_str());
 	this->DiskRmdir(f->path.c_str());
 }
 
-
 DiskMannger::DiskMannger()
 {
+	fat.init(blocks);
 	
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY |
 		FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
 
 
-	root = new Folder("/",FileType::FOLDER);
+	root = new Folder(rootPath,FileType::FOLDER);
 	root->path = rootPath;
+	this->DiskMkdir(rootPath);
 	//设置磁盘根为目录
 	//设置根节点的父节点为自身
 	root->father = root;
-	cout << "欢迎！！-----------您可输入help获得帮助------------" << endl<< "\n[root@localhost A:/]# ";
+	cout << "欢迎！！-----------您可输入help获得帮助------------" << endl<< "\n[root@localhost "+rootPath+"]# ";
 	string opear,cmd;
 	while (cin >> cmd) 
 	{
@@ -168,8 +171,10 @@ void DiskMannger::format(string *blocks)
 		this->root = (Folder*)(this->root->father);
 	}
 
+	
 	this->DiskRmdir(this->root);
 
+	root->child.clear();
 
 	printf("%s\n", "磁盘格式化成功！");
 }
@@ -197,7 +202,7 @@ void DiskMannger::Mkdir()
 	}
 }
 
-void DiskMannger::Rmdir()//TODO fix 不能删除含有文件的文件夹
+void DiskMannger::Rmdir()
 {
 	string name;
 	cin >> name;
@@ -234,8 +239,8 @@ void DiskMannger::ls()
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY |
 				FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);//白色
 		}
-		cout << setw(10)<< ACCESS[this->root->child[i]->access]
-			<< setw(20)<<this->root->child[i]->size
+		cout << setw(10) << ACCESS[this->root->child[i]->access]
+			<< setw(20) << (this->root->child[i]->type != FOLDER ? ((File*)this->root->child[i])->toString(blocks).size() : 4096)
 			<< setw(25)<<this->root->child[i]->modifyDate
 			<< setw(20)<<this->root->child[i]->name
 			<<endl;
@@ -276,7 +281,7 @@ void DiskMannger::create()
 	string name;
 	cin >> name;
 	
-	File *childFile =  new File( name, DOCUMENT);
+	File *childFile =  new File( name, DOCUMENT,fat);
 	//设置父节点
 	childFile->father = (this->root);
 	childFile->path = this->root->path + name;
@@ -297,7 +302,7 @@ void DiskMannger::open()
 	string name,cmd;
 	cin >> name;
 	
-    File * file = (File*)this->root->find(new File(name, DOCUMENT));
+    File * file = (File*)this->root->find(new File(name, DOCUMENT,fat));
 	if (file!=NULL) {
 		
 		printf("%s\n", "文件读写流打开成功!");
@@ -337,7 +342,12 @@ void DiskMannger::write(const char *s, File* file)
 	string content;
 	cin >> content;
 	if (in != NULL)in->close();
-	file->addContent(content.c_str(),blocks);//添加内容到文件中
+	
+	
+	file->addContent(content.c_str(), blocks, fat);//添加内容到文件中
+
+	content = file->toString(blocks);
+
 	out = new ofstream(s);
 	if (out->is_open())
 	{
@@ -356,7 +366,7 @@ void DiskMannger::read(const char *s)
 		*in >> content;
 	}
 	in->close();
-	cout << content << endl;
+	cout << content;
 
 }
 
@@ -364,7 +374,7 @@ void DiskMannger::rm()
 {
 	string name;
 	cin >> name;
-	File *childFile = new File(name, DOCUMENT);
+	File *childFile = new File(name, DOCUMENT,fat);
 	if (this->root->count(childFile)) {
 		//文件重复报错
 		childFile =(File*) this->root->find(childFile);

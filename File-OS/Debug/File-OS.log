@@ -1,6 +1,6 @@
 ﻿  DiskMannger.cpp
-d:\workspace\file-os\file-os\diskmannger.cpp(60): warning C4996: 'rmdir': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _rmdir. See online help for details.
+d:\workspace\file-os\file-os\diskmannger.cpp(59): warning C4996: 'rmdir': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _rmdir. See online help for details.
   c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\direct.h(115): note: 参见“rmdir”的声明
-d:\workspace\file-os\file-os\diskmannger.cpp(76): warning C4018: “<”: 有符号/无符号不匹配
+d:\workspace\file-os\file-os\diskmannger.cpp(75): warning C4018: “<”: 有符号/无符号不匹配
   File-OS.vcxproj -> D:\Workspace\File-OS\Debug\File-OS.exe
   File-OS.vcxproj -> D:\Workspace\File-OS\Debug\File-OS.pdb (Partial PDB)
