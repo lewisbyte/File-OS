@@ -89,9 +89,7 @@ DiskMannger::DiskMannger()
 {
 	fat.init(blocks);
 	
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY |
-		FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
-
+	
 
 	root = new Folder(rootPath,FileType::FOLDER);
 	root->path = rootPath;
@@ -221,7 +219,6 @@ void DiskMannger::Rmdir()
 void DiskMannger::ls()
 {
 	
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_RED | FOREGROUND_GREEN| FOREGROUND_BLUE);
 	cout << setw(10) << "访问权限"
 		<< setw(20) <<"文件大小"
 		<< setw(25) << "修改日期"
@@ -232,13 +229,7 @@ void DiskMannger::ls()
 	for(int i= 0;i<size;i++)
 	{
 		
-		if (this->root->child[i]->type==FOLDER){
-			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_RED | FOREGROUND_GREEN);
-		}
-		else {
-			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY |
-				FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);//白色
-		}
+	
 		cout << setw(10) << ACCESS[this->root->child[i]->access]
 			<< setw(20) << (this->root->child[i]->type != FOLDER ? ((File*)this->root->child[i])->toString(blocks).size() : 4096)
 			<< setw(25)<<this->root->child[i]->modifyDate
@@ -246,8 +237,7 @@ void DiskMannger::ls()
 			<<endl;
 		
 	}
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY |
-		FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
+	
 }
 
 void DiskMannger::cd()
