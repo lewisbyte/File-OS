@@ -10,10 +10,13 @@ public:
 	void DiskWrite(File * file);
 	bool DiskMkdir(string dirName);//创建磁盘文件夹
 	bool DiskRmdir(string dirName);//删除磁盘文件夹
-	bool DiskCkdir(string dirName);//检查磁盘是否存在文件夹
+	bool DiskCkdir(string dirName);
+	void DiskRmdir(Folder * f);
+	//检查磁盘是否存在文件夹
 	DiskMannger();//磁盘构造函数
 	~DiskMannger();
-	void format(char blocks[][N]);//: 对文件存储器进行格式化。
+	void format(string * blocks);//: 对文件存储器进行格式化。
+
 	//磁盘类析构函数
 	
 	void Mkdir();

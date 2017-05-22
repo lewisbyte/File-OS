@@ -17,7 +17,7 @@ const string ACCESS[] = { "只读","可修改","可执行" };
 const string rootPath = "A:/";
 queue<FCB*> persistQueue;//持久化队列
 FAT fat;
-char blocks[N][N];
+string blocks[N];
 ofstream *out = NULL;
 ifstream *in = NULL;
 
@@ -25,33 +25,6 @@ ifstream *in = NULL;
 
 using namespace std;
 
-void DiskMannger::exit()
-{
-	//回退到根目录
-	while (root->father != root) {
-		this->root = (Folder*)(this->root->father);
-	}
-
-	//广度遍历树
-	persistQueue.push(root);
-	while (!persistQueue.empty())
-	{
-		FCB *top = persistQueue.front();
-		persistQueue.pop();
-		if (top->type == FOLDER) {
-			//this->DiskMkdir(top->path);
-			Folder *f = (Folder*)top;
-			for (int i = 0; i < f->child.size(); i++) {
-				persistQueue.push(f->child[i]);
-			}
-		}
-		else {
-			File * f = (File*)top;
-			//this->DiskWrite(f);
-		}
-	}
-
-}
 
 void DiskMannger::DiskWrite(File * file)
 {
@@ -97,7 +70,18 @@ bool DiskMannger::DiskCkdir(string dirName)
 	return false;
 }
 
-
+void DiskMannger::DiskRmdir(Folder *f)
+{
+	//DFS删除
+	for (int i = 0; i < f->child.size(); i++) {
+		if (f->child[i]->type == DOCUMENT) {
+			remove(f->child[i]->path.c_str());
+		}else {
+			this->DiskRmdir((Folder*)f->child[i]);
+		}
+	}
+	this->DiskRmdir(f->path.c_str());
+}
 
 
 DiskMannger::DiskMannger()
@@ -144,7 +128,8 @@ DiskMannger::DiskMannger()
 			this->rm();
 		}
 		else if (cmd == "exit") {
-			this->exit();
+			printf("%s\n", "再见！");
+			break;
 		}
 		else if(cmd=="help"){
 			cout << "\n●format:对文件存储器进行格式化.\n"<<
@@ -174,9 +159,18 @@ DiskMannger::~DiskMannger()
 
 }
 
-void DiskMannger::format(char blocks[][N])
+void DiskMannger::format(string *blocks)
 {
 	fat.init(blocks);
+
+	//回退到根目录
+	while (root->father != root) {
+		this->root = (Folder*)(this->root->father);
+	}
+
+	this->DiskRmdir(this->root);
+
+
 	printf("%s\n", "磁盘格式化成功！");
 }
 
@@ -211,7 +205,7 @@ void DiskMannger::Rmdir()//TODO fix 不能删除含有文件的文件夹
 	childFile = (Folder*) this->root->find(childFile);
 	if (this->root->erase(childFile)) {
 		//文件重复报错
-		_rmdir(childFile->path.c_str());
+		this->DiskRmdir(childFile);
 		cout << "删除文件夹成功" << endl;
 	}else {
 		cout << "无此文件夹 ，删除文件夹失败" << endl;
@@ -343,7 +337,7 @@ void DiskMannger::write(const char *s, File* file)
 	string content;
 	cin >> content;
 	if (in != NULL)in->close();
-	file->addContent(content.c_str());//添加内容到文件中
+	file->addContent(content.c_str(),blocks);//添加内容到文件中
 	out = new ofstream(s);
 	if (out->is_open())
 	{
@@ -377,7 +371,7 @@ void DiskMannger::rm()
 		remove(childFile->path.c_str());
 		childFile->release(fat,blocks);
 		this->root->erase(childFile);
-
+		
 		cout << "删除文件成功！" << endl;
 	}
 	else {

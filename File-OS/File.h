@@ -15,18 +15,13 @@ public:
 	void Serialization();
 	//反序列化
 	void Deserialization();
+	bool addContent(const char * content, string * blocks);//添加文件内容
 	//文件索引
 	int index[N];
 	//上一级文件夹
 	FCB* father;
 
-
-	//添加文件内容
-	bool addContent(const char *content);
-
-	void release(FAT & fat, char blocks[][N]);
-
-	void release(FAT & fat, char ** blocks);//释放磁盘块
+	void release(FAT & fat, string* blocks);//释放磁盘块
 
 
 

@@ -18,13 +18,13 @@ public:
 
 	void init(char blocks[][BLOCK_SIZE]);
 
+	void init(string * blocks);
+
 	int  getBlock();
+
+	void addBlock(int block, string * blocks);
+
 	void addBlock(int block, char blocks[][BLOCK_SIZE]);
 	//获取一个空的磁盘块
-
-	
-	
-
-
 
 };
