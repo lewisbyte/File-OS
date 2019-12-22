@@ -9,7 +9,7 @@ File::File(string _name, FileType _type,FAT &fat)
 	this->name = _name;
 	this->type = _type;
 	this->size = 0;
-	this->index[size] = fat.getBlock();//为文件分配空间
+	this->index[size] = fat.getBlock();//
 }
 
 File::~File()
