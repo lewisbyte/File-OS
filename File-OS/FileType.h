@@ -1,6 +1,6 @@
 #pragma once
 
 enum FileType {
-	FOLDER , //ÎÄ¼þ¼Ð
-	DOCUMENT//ÎÄ¼þ
+	FOLDER , //æ–‡ä»¶å¤¹
+	DOCUMENT//æ–‡æ¡£
 };
