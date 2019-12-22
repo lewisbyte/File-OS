@@ -1,6 +1,6 @@
 #pragma once
 enum Access {
-	ReadOnly,//Ö»¶Á
-	Write,	//Ğ´
-	Executable//¿ÉÖ´ĞĞ
+	ReadOnly,//åªè¯»
+	Write,	//å†™å…¥
+	Executable//å¯æ‰§è¡Œ
 };

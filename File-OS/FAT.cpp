@@ -2,7 +2,7 @@
 #include "FAT.h"
 
 
-void FAT::init(string blocks[])//³õÊ¼»¯´ÅÅÌ
+void FAT::init(string blocks[])//ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 {
 	for (int i = 0; i < BLOCK_SIZE; i++) {
 		this->freeDiskBlock.push(i);
@@ -10,7 +10,7 @@ void FAT::init(string blocks[])//³õÊ¼»¯´ÅÅÌ
 	}
 }
 
-int FAT::getBlock()//»ñÈ¡¿Õ´ÅÅÌ
+int FAT::getBlock()//ï¿½ï¿½È¡ï¿½Õ´ï¿½ï¿½ï¿½
 {
 	if (this->freeDiskBlock.size() > 0) {
 		int blockId = this->freeDiskBlock.top();
@@ -21,7 +21,7 @@ int FAT::getBlock()//»ñÈ¡¿Õ´ÅÅÌ
 	return -1;
 }
 
-void FAT::addBlock(int block, string  blocks[])//»ØÊÕ´ÅÅÌ¿é
+void FAT::addBlock(int block, string  blocks[])//ï¿½ï¿½ï¿½Õ´ï¿½ï¿½Ì¿ï¿½
 {
 	this->freeDiskBlock.push(block);
 	blocks[block].clear();

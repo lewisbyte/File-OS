@@ -8,24 +8,24 @@ public:
 
 	
 	void DiskWrite(File * file);
-	bool DiskMkdir(string dirName);//╢╢╫╗╢еелнд╪Ч╪п
-	bool DiskRmdir(string dirName);//и╬ЁЩ╢еелнд╪Ч╪п
+	bool DiskMkdir(string dirName);//О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫д╪О©╫О©╫О©╫
+	bool DiskRmdir(string dirName);//и╬О©╫О©╫О©╫О©╫О©╫О©╫О©╫д╪О©╫О©╫О©╫
 	bool DiskCkdir(string dirName);
 	void DiskRmdir(Folder * f);
-	//╪Л╡И╢еелйг╥Я╢Фтзнд╪Ч╪п
-	DiskMannger();//╢еел╧╧тЛ╨╞йЩ
-	~DiskMannger();	//╢еелюЮнЖ╧╧╨╞йЩ
-	void format(string * blocks);//: ╤тнд╪Ч╢Ф╢╒фВ╫Ьпп╦Яй╫╩╞║ё
+	//О©╫О©╫О©╫О©╫О©╫О©╫О©╫г╥О©╫О©╫О©╫О©╫О©╫д╪О©╫О©╫О©╫
+	DiskMannger();//О©╫О©╫О©╫л╧О©╫О©╫Л╨╞О©╫О©╫
+	~DiskMannger();	//О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫
+	void format(string * blocks);//: О©╫О©╫О©╫д╪О©╫О©╫Ф╢╒О©╫О©╫О©╫О©╫О©╫п╦О©╫й╫О©╫О©╫О©╫О©╫
 	void Mkdir();
 	void Rmdir();
-	void ls(); //: сцсзотй╬д©б╪
-	void cd(); //: сцсз╦Э╦д╣╠г╟д©б╪
-	void create();//: сцсз╢╢╫╗нд╪Ч
-	void open(); //: сцсз╢Р©╙нд╪Ч
-	void close(); //: сцсз╧ь╠унд╪Ч
-	void write(const char * s, File * file);//: сцсзп╢нд╪Ч
-	void read(const char * s);//: сцсз╤анд╪Ч
-	void rm(); //: сцсзи╬ЁЩнд╪Ч
+	void ls(); //: О©╫О©╫О©╫О©╫О©╫О©╫й╬д©б╪
+	void cd(); //: О©╫О©╫О©╫з╦О©╫О©╫д╣О©╫г╟д©б╪
+	void create();//: О©╫О©╫О©╫з╢О©╫О©╫О©╫О©╫д╪О©╫
+	void open(); //: О©╫О©╫О©╫з╢О©╫О©╫д╪О©╫
+	void close(); //: О©╫О©╫О©╫з╧ь╠О©╫О©╫д╪О©╫
+	void write(const char * s, File * file);//: О©╫О©╫О©╫О©╫п╢О©╫д╪О©╫
+	void read(const char * s);//: О©╫О©╫О©╫з╤О©╫О©╫д╪О©╫
+	void rm(); //: О©╫О©╫О©╫О©╫и╬О©╫О©╫О©╫д╪О©╫
 private:
 	Folder *root;
 };
