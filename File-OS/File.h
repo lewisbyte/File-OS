@@ -6,26 +6,26 @@
 class File:public FCB
 {
 public:
-	
-	//¹¹Ôìº¯Êı
-	File();
-	File(string _name, FileType _type, FAT & fat);
-	
-	//Îö¹¹º¯Êı
-	~File();
-	//ĞòÁĞ»¯
-	void Serialization();
-	//·´ĞòÁĞ»¯
-	void Deserialization();
-	bool addContent(const char * content, string  blocks[], FAT & fat);
 
-	//ÎÄ¼şË÷Òı
-	int index[N];
-	//ÉÏÒ»¼¶ÎÄ¼ş¼Ğ
-	FCB* father;
+    //æ„é€ å‡½æ•°
+    File();
+    File(string _name, FileType _type, FAT & fat);
 
-	void release(FAT & fat, string* blocks);
-	string toString(string blocks[]);
-	//ÊÍ·Å´ÅÅÌ¿é
+    //ææ„å‡½æ•°
+    ~File();
+    //åºåˆ—åŒ–
+    void Serialization();
+    //ååºåˆ—åŒ–
+    void Deserialization();
+    bool addContent(const char * content, string  blocks[], FAT & fat);
+
+    //æ–‡ä»¶ç´¢å¼•
+    int index[N];
+    //ä¸Šä¸€çº§æ–‡ä»¶å¤¹
+    FCB* father;
+
+    void release(FAT & fat, string* blocks);
+    string toString(string blocks[]);
+    //é‡Šæ”¾ç£ç›˜å—
 
 };

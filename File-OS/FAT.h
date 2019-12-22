@@ -1,3 +1,4 @@
+
 #pragma once
 
 #include<stack>
@@ -10,14 +11,14 @@ using namespace std;
 class FAT {
 public:
 
-	stack<int>freeDiskBlock;//¿Õ´ÅÅÌ¿éÕ»
+    stack<int>freeDiskBlock;//ç©ºç£ç›˜å—æ ˆ
 
-	stack<int>fullDiskBlock;//Õ¼ÓÃ´ÅÅÌ¿é
+    stack<int>fullDiskBlock;//å ç”¨ç£ç›˜å—
 
-	void init(string  blocks[]);
+    void init(string  blocks[]);
 
-	int  getBlock();
+    int  getBlock();
 
-	void addBlock(int block, string  blocks[]);//»ñÈ¡Ò»¸ö¿ÕµÄ´ÅÅÌ¿é
+    void addBlock(int block, string  blocks[]);//è·å–ä¸€ä¸ªç©ºçš„ç£ç›˜å—
 
 };
