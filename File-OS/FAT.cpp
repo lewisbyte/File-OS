@@ -1,6 +1,8 @@
 #include<cstring>
 #include "FAT.h"
-
+#include <string>
+#include <sstream>
+#include <iostream>
 
 void FAT::init(string blocks[])//初始化磁盘
 {

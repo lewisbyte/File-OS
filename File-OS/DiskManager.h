@@ -2,7 +2,7 @@
 
 #include "Folder.h"
 
-class DiskMannger
+class DiskManager
 {
 public:
 
@@ -13,8 +13,8 @@ public:
     bool DiskCkdir(string dirName);
     void DiskRmdir(Folder * f);
     //检查磁盘是否存在文件夹
-    DiskMannger();//磁盘构造函数
-    ~DiskMannger();	//磁盘类析构函数
+    DiskManager();//磁盘构造函数
+    ~DiskManager();	//磁盘类析构函数
     void format(string * blocks);//: 对文件存储器进行格式化。
     void Mkdir();
     void Rmdir();

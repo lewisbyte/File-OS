@@ -1,10 +1,9 @@
-#include <windows.h> 
 #include "File.h"
-#include "DiskMannger.h"
+#include "DiskManager.h"
 
 using namespace std;
 int main()
 {
-	DiskMannger();
+    DiskManager();
 	return 0;
 }
