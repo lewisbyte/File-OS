@@ -8,9 +8,13 @@
 #include "FileType.h"
 #include "Access.h"
 #include "FAT.h"
-#include<direct.h>
-#include<io.h>
+//#include<direct.h>
+#include <dirent.h>
+//#include <io.h>
+#include <unistd.h>
 
+#include <sys/types.h>
+#include <sys/stat.h>
 
 const string ACCESS[] = { "只读","可修改","可执行" };
 const string rootPath = "/Users/";
@@ -47,7 +51,7 @@ void DiskManager::DiskWrite(File * file)
 bool DiskManager::DiskMkdir(string dirName)
 {
 	printf("%s\n",dirName.c_str());
-	return _mkdir(dirName.c_str()) == 0;
+	return mkdir(dirName.c_str(),S_IRWXU) == 0;
 
 
 }
@@ -61,9 +65,9 @@ bool DiskManager::DiskRmdir(string dirName)
 bool DiskManager::DiskCkdir(string dirName)
 {
 	
-	if (_access(dirName.c_str(), 0) == -1)
+	if (access(dirName.c_str(), 0) == -1)
 	{
-		return  _mkdir(dirName.c_str()) == 0;
+        return mkdir(dirName.c_str(),S_IRWXU) == 0;
 	}
 	return false;
 }
