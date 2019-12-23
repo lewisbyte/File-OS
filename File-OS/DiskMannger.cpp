@@ -1,20 +1,19 @@
-﻿#include <windows.h> 
-#include<stack>
+﻿#include<stack>
 #include<iostream>
 #include<iomanip>
 #include<queue>
-#include <fstream>  
-#include<direct.h>  
-#include<io.h> 
-#include "DiskMannger.h"
+#include <fstream>
+#include "DiskManager.h"
 #include "Folder.h"
 #include "FileType.h"
 #include "Access.h"
 #include "FAT.h"
+#include<direct.h>
+#include<io.h>
 
 
 const string ACCESS[] = { "只读","可修改","可执行" };
-const string rootPath = "D:/VitualDisk/";
+const string rootPath = "/Users/";
 queue<FCB*> persistQueue;//持久化队列
 FAT fat;
 string blocks[N];
@@ -25,7 +24,7 @@ ifstream *in = NULL;
 using namespace std;
 
 
-void DiskMannger::DiskWrite(File * file)
+void DiskManager::DiskWrite(File * file)
 {
 	//文件输出流
 
@@ -45,7 +44,7 @@ void DiskMannger::DiskWrite(File * file)
 
 }
 
-bool DiskMannger::DiskMkdir(string dirName)
+bool DiskManager::DiskMkdir(string dirName)
 {
 	printf("%s\n",dirName.c_str());
 	return _mkdir(dirName.c_str()) == 0;
@@ -53,13 +52,13 @@ bool DiskMannger::DiskMkdir(string dirName)
 
 }
 
-bool DiskMannger::DiskRmdir(string dirName)
+bool DiskManager::DiskRmdir(string dirName)
 {
 	 
 	return rmdir(dirName.c_str()) == 0;
 }
 
-bool DiskMannger::DiskCkdir(string dirName)
+bool DiskManager::DiskCkdir(string dirName)
 {
 	
 	if (_access(dirName.c_str(), 0) == -1)
@@ -69,7 +68,7 @@ bool DiskMannger::DiskCkdir(string dirName)
 	return false;
 }
 
-void DiskMannger::DiskRmdir(Folder *f)
+void DiskManager::DiskRmdir(Folder *f)
 {
 	//DFS删除
 	for (int i = 0; i < f->child.size(); i++) {
@@ -85,7 +84,7 @@ void DiskMannger::DiskRmdir(Folder *f)
 	this->DiskRmdir(f->path.c_str());
 }
 
-DiskMannger::DiskMannger()
+DiskManager::DiskManager()
 {
 	fat.init(blocks);
 	
@@ -155,12 +154,12 @@ DiskMannger::DiskMannger()
 	}
 }
 
-DiskMannger::~DiskMannger()
+DiskManager::~DiskManager()
 {
 
 }
 
-void DiskMannger::format(string *blocks)
+void DiskManager::format(string *blocks)
 {
 	fat.init(blocks);
 
@@ -177,7 +176,7 @@ void DiskMannger::format(string *blocks)
 	printf("%s\n", "磁盘格式化成功！");
 }
 
-void DiskMannger::Mkdir()
+void DiskManager::Mkdir()
 {
 	string name;
 	cin >> name;
@@ -200,7 +199,7 @@ void DiskMannger::Mkdir()
 	}
 }
 
-void DiskMannger::Rmdir()
+void DiskManager::Rmdir()
 {
 	string name;
 	cin >> name;
@@ -216,7 +215,7 @@ void DiskMannger::Rmdir()
 	}
 }
 
-void DiskMannger::ls()
+void DiskManager::ls()
 {
 	
 	cout << setw(10) << "访问权限"
@@ -240,7 +239,7 @@ void DiskMannger::ls()
 	
 }
 
-void DiskMannger::cd()
+void DiskManager::cd()
 {
 	string name;
 	cin >> name;
@@ -266,7 +265,7 @@ void DiskMannger::cd()
 	
 }
 
-void DiskMannger::create()
+void DiskManager::create()
 {
 	string name;
 	cin >> name;
@@ -287,7 +286,7 @@ void DiskMannger::create()
 	}
 }
 
-void DiskMannger::open()
+void DiskManager::open()
 {
 	string name,cmd;
 	cin >> name;
@@ -316,7 +315,7 @@ void DiskMannger::open()
 	}
 }
 
-void DiskMannger::close()
+void DiskManager::close()
 {
 	if (out == NULL||in==NULL) {
 		printf("%s\n", "无文件读写流需要关闭!");
@@ -327,7 +326,7 @@ void DiskMannger::close()
 	}
 }
 
-void DiskMannger::write(const char *s, File* file)
+void DiskManager::write(const char *s, File* file)
 {
 	string content;
 	cin >> content;
@@ -346,7 +345,7 @@ void DiskMannger::write(const char *s, File* file)
 	out->close();
 }
 
-void DiskMannger::read(const char *s)
+void DiskManager::read(const char *s)
 {
 	char *content = new char[N];
 	if (out != NULL)out->close();
@@ -360,7 +359,7 @@ void DiskMannger::read(const char *s)
 
 }
 
-void DiskMannger::rm()
+void DiskManager::rm()
 {
 	string name;
 	cin >> name;

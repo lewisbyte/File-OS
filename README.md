@@ -1,3 +1,6 @@
+## 申明
+* 各位小伙伴，遇到问题或者bug 可以在 issue 提出，不要在我的 csdn 下面提出啦～，我查看的不太多啦，现在推荐各位使用 Clion 来运行这个项目哦，主要是因为我现在是使用的mac 系统，没法继续使用visual studio 来维护项目了，谢谢各位啦
+
 # File-OS
 File Operating System
 # 简单文件系统的实现
