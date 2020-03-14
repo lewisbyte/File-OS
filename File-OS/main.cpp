@@ -2,8 +2,8 @@
 #include "DiskManager.h"
 
 using namespace std;
-int main()
-{
+
+int main() {
     DiskManager();
-	return 0;
+    return 0;
 }
