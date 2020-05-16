@@ -1,12 +1,15 @@
 #pragma once
+
 #include<string>
 #include "FileType.h"
 #include "Access.h"
 #include "FAT.h"
 #include <time.h>
-const int N  = 4096;
+
+const int N = 4096;
 
 using namespace std;
+
 class FCB {
 public:
     string name;//文件名：    文件名.扩展名
@@ -19,7 +22,9 @@ public:
     FCB *index[N];//索引表
     FCB *father;//父节点
     FCB();
+
     ~FCB();
+
     string getTime();//获取系统时间
 
 };

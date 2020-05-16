@@ -1,8 +1,5 @@
-#include<cstring>
 #include "FAT.h"
 #include <string>
-#include <sstream>
-#include <iostream>
 
 void FAT::init(string blocks[])//初始化磁盘
 {
@@ -23,7 +20,7 @@ int FAT::getBlock()//获取空磁盘
     return -1;
 }
 
-void FAT::addBlock(int block, string  blocks[])//回收磁盘块
+void FAT::addBlock(int block, string blocks[])//回收磁盘块
 {
     this->freeDiskBlock.push(block);
     blocks[block].clear();
