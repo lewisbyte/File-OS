@@ -24,31 +24,19 @@ using namespace std;
 
 void DiskManager::DiskWrite(File *file) {
     //文件输出流
-
     printf("%s\n", file->path.c_str());
-
-    //freopen(file->name.c_str(), "w", stdout);
-
     out = new ofstream(file->path.c_str());
     if (out->is_open()) {
         out->close();
     }
-
-    //cout << "hello world" << endl;
-
-    // fclose(stdout);//关闭文件
-
 }
 
 bool DiskManager::DiskMkdir(string dirName) {
     printf("%s\n", dirName.c_str());
     return mkdir(dirName.c_str(), S_IRWXU) == 0;
-
-
 }
 
 bool DiskManager::DiskRmdir(string dirName) {
-
     return rmdir(dirName.c_str()) == 0;
 }
 
@@ -63,9 +51,11 @@ bool DiskManager::DiskCkdir(string dirName) {
 void DiskManager::DiskRmdir(Folder *f) {
     //DFS删除
     for (int i = 0; i < f->child.size(); i++) {
+        //判断文件类型
         if (f->child[i]->type == DOCUMENT) {
             printf("%s\n", f->child[i]->path.c_str());
             remove(f->child[i]->path.c_str());
+            delete f->child[i];
         } else {
             this->DiskRmdir((Folder *) f->child[i]);
         }
@@ -76,8 +66,6 @@ void DiskManager::DiskRmdir(Folder *f) {
 
 DiskManager::DiskManager() {
     fat.init(blocks);
-
-
     root = new Folder(rootPath, FileType::FOLDER);
     root->path = rootPath;
     this->DiskMkdir(rootPath);
@@ -126,7 +114,6 @@ DiskManager::DiskManager() {
             cout << "输入指令错误，请重新输入！！" << endl;
         }
         cout << "\n[root@localhost " + this->root->path + " ]# ";
-
     }
 }
 
@@ -141,26 +128,19 @@ void DiskManager::format(string *blocks) {
     while (root->father != root) {
         this->root = (Folder *) (this->root->father);
     }
-
-
     this->DiskRmdir(this->root);
-
     root->child.clear();
-
     printf("%s\n", "磁盘格式化成功！");
 }
 
 void DiskManager::Mkdir() {
     string name;
     cin >> name;
-
     Folder *childFile = new Folder(name, FileType::FOLDER);
-
     //设置父节点
     childFile->father = (this->root);
     childFile->path = this->root->path + name + "/";
     //判断是否文件重复
-
     if (this->root->count(childFile)) {
         //文件重复报错
         cout << "创建文件夹失败，文件夹名出现重复" << endl;
@@ -168,7 +148,6 @@ void DiskManager::Mkdir() {
         cout << "创建文件夹成功" << endl;
         this->DiskMkdir(childFile->path);
         this->root->addChild(childFile);
-
     }
 }
 
@@ -183,31 +162,21 @@ void DiskManager::Rmdir() {
         cout << "删除文件夹成功" << endl;
     } else {
         cout << "无此文件夹 ，删除文件夹失败" << endl;
-
     }
 }
 
 void DiskManager::ls() {
 
-    cout << setw(10) << "访问权限"
-         << setw(20) << "文件大小"
-         << setw(25) << "修改日期"
-         << setw(20) << "文件名"
-         << endl;
+    cout << setw(10) << "访问权限"<< setw(20) << "文件大小"<< setw(25) << "修改日期" << setw(20) << "文件名"<< endl;
     int size = this->root->size();
-
     for (int i = 0; i < size; i++) {
-
-
         cout << setw(10) << ACCESS[this->root->child[i]->access]
              << setw(20)
              << (this->root->child[i]->type != FOLDER ? ((File *) this->root->child[i])->toString(blocks).size() : 4096)
              << setw(25) << this->root->child[i]->modifyDate
              << setw(20) << this->root->child[i]->name
              << endl;
-
     }
-
 }
 
 void DiskManager::cd() {
@@ -255,7 +224,6 @@ void DiskManager::open() {
 
     File *file = (File *) this->root->find(new File(name, DOCUMENT, fat));
     if (file != NULL) {
-
         printf("%s\n", "文件读写流打开成功!");
         cout << "\n[root@localhost " + this->root->path + " ]# ";
         while (cin >> cmd) {
@@ -288,12 +256,8 @@ void DiskManager::write(const char *s, File *file) {
     string content;
     cin >> content;
     if (in != NULL)in->close();
-
-
     file->addContent(content.c_str(), blocks, fat);//添加内容到文件中
-
     content = file->toString(blocks);
-
     out = new ofstream(s);
     if (out->is_open()) {
         *out << content;
@@ -310,7 +274,6 @@ void DiskManager::read(const char *s) {
     }
     in->close();
     cout << content;
-
 }
 
 void DiskManager::rm() {
@@ -323,10 +286,8 @@ void DiskManager::rm() {
         remove(childFile->path.c_str());
         childFile->release(fat, blocks);
         this->root->erase(childFile);
-
         cout << "删除文件成功！" << endl;
     } else {
         cout << "无此文件 ，删除文件失败" << endl;
     }
-
 }
