@@ -4,16 +4,16 @@ project(File-OS)
 set(CMAKE_CXX_STANDARD 11)
 
 add_executable(File-OS
-        File-OS/main.cpp
-        File-OS/FileType.h
-        File-OS/DiskManager.h
-        File-OS/DiskMannger.cpp
-        File-OS/FAT.h
-        File-OS/FAT.cpp
-        File-OS/FCB.h
-        File-OS/FCB.cpp
-        File-OS/File.h
-        File-OS/File.cpp
-        File-OS/Folder.h
-        File-OS/Folder.cpp
+        src/main.cpp
+        src/FileType.h
+        src/DiskManager.h
+        src/DiskMannger.cpp
+        src/FAT.h
+        src/FAT.cpp
+        src/FCB.h
+        src/FCB.cpp
+        src/File.h
+        src/File.cpp
+        src/Folder.h
+        src/Folder.cpp
         )

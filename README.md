@@ -1,6 +1,22 @@
-## 申明
-* 本项目可在 *unix 环境下可正常运行/编译，windows 环境下应该是不可以的，需要支持windows 需要对文件 ```` DiskMannger.cpp ```` 做一些修改，对于跨平台的处理也欢迎各位多多提些pr，本项目将不再对Windows平台提供支持
-* 各位小伙伴，遇到问题或者bug 可以在 issue 提出，不要在我的 csdn 下面提出啦～，我查看的不太多啦，现在推荐各位使用 Clion 来运行这个项目哦，主要是因为我现在是使用的mac 系统，没法继续使用visual studio 来维护项目了，谢谢各位啦
+
+# macos/linux  平台使用、编译说明
+* 1. 控制台输入：`cmake ./CMakeLists.txt ` 
+* 2. 控制台输入：`make `
+* 3. 编译成功之后，会有如下可执行文件`File-OS`生成:
+```
+total 464
+-rw-r--r--   1 lewis  staff    13K 12 13 18:15 CMakeCache.txt
+drwxr-xr-x  13 lewis  staff   416B 12 13 18:15 CMakeFiles
+-rw-r--r--   1 lewis  staff   373B 12 13 18:11 CMakeLists.txt
+-rwxr-xr-x   1 lewis  staff   185K 12 13 18:15 File-OS
+-rw-r--r--   1 lewis  staff   1.0K 12 23  2019 LICENSE
+-rw-r--r--   1 lewis  staff   9.0K 12 13 18:15 Makefile
+-rw-r--r--   1 lewis  staff   2.3K 12 13 18:15 README.md
+-rw-r--r--   1 lewis  staff   1.5K 12 13 18:15 cmake_install.cmake
+drwxr-xr-x  15 lewis  staff   480B  5 16  2020 src
+```
+* 4.控制台输入：` ./File-OS ` 即可执行系统
+
 
 # File-OS
 File Operating System
