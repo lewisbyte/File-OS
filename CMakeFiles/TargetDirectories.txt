@@ -1,0 +1,3 @@
+/Users/lewis/repo/File-OS/CMakeFiles/rebuild_cache.dir
+/Users/lewis/repo/File-OS/CMakeFiles/edit_cache.dir
+/Users/lewis/repo/File-OS/CMakeFiles/File-OS.dir
