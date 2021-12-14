@@ -1,3 +1,6 @@
+# clion 使用说明
+* 1. 将项目导入，按照提示选择CMakeLists文件，即可完成项目空间的构建
+
 
 # macos/linux  平台使用、编译说明
 * 1. 控制台输入：`cmake ./CMakeLists.txt ` 
@@ -16,6 +19,18 @@ drwxr-xr-x  13 lewis  staff   416B 12 13 18:15 CMakeFiles
 drwxr-xr-x  15 lewis  staff   480B  5 16  2020 src
 ```
 * 4.控制台输入：` ./File-OS ` 即可执行系统
+
+# Q & A
+* 1.会出现cmake的低版本问题，按照建议直接升级CMake版本即可
+```
+[root@VM-0-2-centos File-OS]# cmake ./CMakeLists.txt 
+CMake Error at CMakeLists.txt:1 (cmake_minimum_required):
+  CMake 3.15 or higher is required.  You are running version 2.8.12.2
+
+
+-- Configuring incomplete, errors occurred!
+```
+
 
 
 # File-OS
