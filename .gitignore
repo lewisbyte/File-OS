@@ -31,3 +31,10 @@
 
 .idea
 cmake-build-debug
+
+# 编译输出文件
+CMakeCache.txt
+cmake_install.cmake
+CMakeFiles/
+Makefile
+File-OS
