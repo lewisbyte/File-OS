@@ -1,3 +1,7 @@
+## Stargazers over time
+[![Stargazers over time](https://starchart.cc/lewisbyte/File-OS.svg?variant=adaptive)](https://starchart.cc/lewisbyte/File-OS)
+
+
 # clion 使用说明
 * 1. 将项目导入，按照提示选择CMakeLists文件，即可完成项目空间的构建
 
